@@ -1,6 +1,6 @@
-package co.unicauca.digital.repository.back.handler;
+package co.unicauca.digital.repository.back.global.exception.handler;
 
-import co.unicauca.digital.repository.back.exception.BusinessRuleException;
+import co.unicauca.digital.repository.back.global.exception.BusinessRuleException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;

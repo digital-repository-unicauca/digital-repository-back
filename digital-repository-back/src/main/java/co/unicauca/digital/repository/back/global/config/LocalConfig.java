@@ -1,4 +1,4 @@
-package co.unicauca.digital.repository.back.config;
+package co.unicauca.digital.repository.back.global.config;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,7 +11,7 @@ public class LocalConfig {
     @Bean
     public MessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasenames("messages", "exceptions");
+        messageSource.setBasenames("validation", "exceptions");
         messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
     }

@@ -1,4 +1,4 @@
-package co.unicauca.digital.repository.back.exception;
+package co.unicauca.digital.repository.back.global.exception;
 
 public class BusinessRuleException extends BaseException{
 
