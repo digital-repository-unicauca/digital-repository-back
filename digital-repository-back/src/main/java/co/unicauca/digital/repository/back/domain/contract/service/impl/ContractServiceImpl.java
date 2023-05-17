@@ -32,10 +32,10 @@ public class ContractServiceImpl implements IContractService {
     }
 
     /**
-     * @see IContractService#saveContract(ContractDtoRequest)
+     * @see IContractService#createContract(ContractDtoRequest)
      */
     @Override
-    public Response<ContractDtoResponse> saveContract(final ContractDtoRequest contractDtoRequest) {
+    public Response<ContractDtoResponse> createContract(final ContractDtoRequest contractDtoRequest) {
 
         if(isInvalidReferenceFormat(contractDtoRequest.getReference())) throw new BusinessRuleException("bad.request.contract.format");
 

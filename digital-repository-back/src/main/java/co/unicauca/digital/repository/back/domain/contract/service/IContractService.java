@@ -15,5 +15,5 @@ public interface IContractService {
      * @param contractDtoRequest {@link ContractDtoRequest} Object with the information to be inserted, received in the body of the request to the service
      * @return {@link Response} Response object for the service, which contains information about the outcome of the transaction.
      */
-    Response<ContractDtoResponse> saveContract(final ContractDtoRequest contractDtoRequest);
+    Response<ContractDtoResponse> createContract(final ContractDtoRequest contractDtoRequest);
 }

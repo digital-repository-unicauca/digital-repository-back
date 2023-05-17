@@ -31,8 +31,8 @@ public class ContractController {
      * @param contractDtoRequest {@link ContractDtoRequest} Object with the information to be inserted, received in the body of the request to the service
      * @return {@link Response} Response object for the service, which contains information about the outcome of the transaction.
      */
-    @PostMapping
-    public ResponseEntity<Response<ContractDtoResponse>> saveEmployee(@Valid @RequestBody final ContractDtoRequest contractDtoRequest){
-        return new ResponseEntity<>(this.contractService.saveContract(contractDtoRequest), HttpStatus.OK);
+    @PostMapping("")
+    public ResponseEntity<Response<ContractDtoResponse>> createContract(@Valid @RequestBody final ContractDtoRequest contractDtoRequest){
+        return new ResponseEntity<>(this.contractService.createContract(contractDtoRequest), HttpStatus.OK);
     }
 }
