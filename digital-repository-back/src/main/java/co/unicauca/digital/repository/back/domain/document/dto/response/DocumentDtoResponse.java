@@ -1,0 +1,28 @@
+package co.unicauca.digital.repository.back.domain.document.dto.response;
+
+import co.unicauca.digital.repository.back.domain.collection.model.Collection;
+import lombok.*;
+
+import java.time.LocalDateTime;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class DocumentDtoResponse {
+    private Integer id;
+    private String name;
+    private String description;
+    private Integer ordering;
+    private Integer url;
+    private Integer consecutive;
+    private boolean isException;
+    private String type;
+    private LocalDateTime expeditionDate;
+    private String createUser;
+    private LocalDateTime createTime;
+    private String updateUser;
+    private LocalDateTime updateTime;
+    private Collection collection;
+}
