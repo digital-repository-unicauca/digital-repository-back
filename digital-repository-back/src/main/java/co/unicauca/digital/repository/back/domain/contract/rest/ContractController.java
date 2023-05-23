@@ -85,4 +85,6 @@ public class ContractController {
     public ResponseEntity<Response<Boolean>> deleteContract(@Valid @PathVariable final Integer id){
         return new ResponseEntity<>(this.contractService.deleteContract(id), HttpStatus.OK);
     }
+
+
 }
