@@ -1,0 +1,44 @@
+package co.unicauca.digital.repository.back.domain.vendor.model;
+
+import lombok.*;
+
+import javax.persistence.*;
+import javax.validation.constraints.FutureOrPresent;
+import java.time.LocalDateTime;
+
+/**
+ * Class that defines an entity for the O/R mapping of the CONTRACT table.
+ */
+@Entity
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
+public class Vendor {
+
+    /** Vendor id */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    /** Vendor name */
+    @Column(length = 250)
+    private String name;
+
+    /** Vendor identification number */
+    @Column(length = 250, unique = true)
+    private String identification;
+
+    /** Vendor create User */
+    @Column(length = 250)
+    private String createUser;
+
+    /** Vendor create time  */
+    private LocalDateTime createTime;
+
+    /** Vendor last update user */
+    @Column(length = 250)
+    private String updateUser;
+
+    /** Vendor last update time */
+    private LocalDateTime updateTime;
+
+}
+

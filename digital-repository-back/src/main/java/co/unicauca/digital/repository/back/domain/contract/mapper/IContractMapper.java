@@ -7,6 +7,9 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
+/**
+ * Class that defines the mapper in charge of the O/R transition to a DTO object.
+ */
 @Mapper(componentModel = "spring")
 public interface IContractMapper {
     @Mappings({
