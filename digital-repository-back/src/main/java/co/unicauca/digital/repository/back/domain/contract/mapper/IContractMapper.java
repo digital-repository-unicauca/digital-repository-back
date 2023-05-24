@@ -1,7 +1,8 @@
 package co.unicauca.digital.repository.back.domain.contract.mapper;
 
 import co.unicauca.digital.repository.back.domain.contract.dto.request.ContractDtoCreateRequest;
-import co.unicauca.digital.repository.back.domain.contract.dto.response.ContractDtoResponse;
+import co.unicauca.digital.repository.back.domain.contract.dto.response.ContractDtoCreateResponse;
+import co.unicauca.digital.repository.back.domain.contract.dto.response.ContractDtoFindResponse;
 import co.unicauca.digital.repository.back.domain.contract.model.Contract;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -13,14 +14,36 @@ import org.mapstruct.Mappings;
 @Mapper(componentModel = "spring")
 public interface IContractMapper {
     @Mappings({
-            @Mapping(target = "id", source = "id"),
-            @Mapping(target = "reference", source = "reference")
+            @Mapping(target = "reference", source = "reference"),
+            @Mapping(target = "signingDate", source = "signingDate"),
+            @Mapping(target = "initialDate", source = "initialDate"),
+            @Mapping(target = "finalDate", source = "finalDate"),
+            @Mapping(target = "status", source = "status"),
+            @Mapping(target = "subject", source = "subject"),
+            @Mapping(target = "createUser", source = "createUser"),
+            @Mapping(target = "createTime", source = "createTime")
     })
-    ContractDtoResponse toDto(final Contract contract);
+    ContractDtoCreateResponse toDtoCreate(final Contract contract);
 
     @Mappings({
-            @Mapping(target = "reference", source = "reference")
+            @Mapping(target = "id", source = "id"),
+            @Mapping(target = "reference", source = "reference"),
+            @Mapping(target = "signingDate", source = "signingDate"),
+            @Mapping(target = "initialDate", source = "initialDate"),
+            @Mapping(target = "finalDate", source = "finalDate"),
+            @Mapping(target = "status", source = "status"),
+            @Mapping(target = "subject", source = "subject"),
     })
-    Contract toEntity(final ContractDtoCreateRequest requestDto);
+    ContractDtoFindResponse toDtoFind(final Contract contract);
+
+    @Mappings({
+            @Mapping(target = "reference", source = "reference"),
+            @Mapping(target = "signingDate", source = "signingDate"),
+            @Mapping(target = "initialDate", source = "initialDate"),
+            @Mapping(target = "finalDate", source = "finalDate"),
+            @Mapping(target = "status", source = "status"),
+            @Mapping(target = "subject", source = "subject")
+    })
+    Contract toEntityCreate(final ContractDtoCreateRequest contractDtoCreateRequest);
 
 }

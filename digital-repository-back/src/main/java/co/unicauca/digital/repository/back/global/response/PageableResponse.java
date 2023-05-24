@@ -30,5 +30,4 @@ public class PageableResponse<T>{
 
         /** if last page */
         private boolean last;
-
 }

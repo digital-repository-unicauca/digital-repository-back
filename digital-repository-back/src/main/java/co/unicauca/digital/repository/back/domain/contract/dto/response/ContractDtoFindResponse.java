@@ -22,11 +22,9 @@ public class ContractDtoFindResponse {
     private String reference;
 
     /** Contract date of signature  */
-    @PastOrPresent
     private LocalDateTime signingDate;
 
     /** Contract initial date */
-    @PastOrPresent
     private LocalDateTime initialDate;
 
     /** Contract final date */
@@ -36,6 +34,5 @@ public class ContractDtoFindResponse {
     private ContractStatusEnum status;
 
     /** Contract subject */
-    @Column(length = 250)
     private String subject;
 }

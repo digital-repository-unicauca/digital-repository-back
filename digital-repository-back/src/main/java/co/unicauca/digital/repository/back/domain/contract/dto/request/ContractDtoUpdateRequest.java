@@ -6,7 +6,10 @@ import lombok.*;
 import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Positive;
 import java.time.LocalDateTime;
 
 /**
@@ -16,27 +19,31 @@ import java.time.LocalDateTime;
 public class ContractDtoUpdateRequest {
 
     /** Contract id */
+    @NotNull(message = "{contract.ID.field.not.null}")
+    @Positive(message = "{contract.ID.field.positive}")
     private Integer id;
 
     /** Contract code */
+    @NotNull(message = "{contract.reference.field.not.null}")
+    @NotEmpty(message = "{contract.reference.field.not.empty}")
     private String reference;
 
     /** Contract date of signature  */
-    @PastOrPresent
     private LocalDateTime signingDate;
 
     /** Contract initial date */
-    @PastOrPresent
     private LocalDateTime initialDate;
 
     /** Contract final date */
     private LocalDateTime finalDate;
 
     @Enumerated(EnumType.STRING)
+    @NotNull(message = "{contract.status.field.not.null}")
     private ContractStatusEnum status;
 
     /** Contract subject */
-    @Column(length = 250)
+    @NotNull(message = "{contract.subject.field.not.null}")
+    @NotEmpty(message = "{contract.subject.field.not.empty}")
     private String subject;
 
 }

@@ -15,5 +15,5 @@ public interface IContractRepository extends JpaRepository<Contract, Integer> {
     /**
      * Query find contract by reference
      */
-    Optional<Vendor> findByReference(String identification);
+    Optional<Contract> findByReference(String reference);
 }

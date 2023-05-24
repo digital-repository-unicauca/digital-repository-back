@@ -18,7 +18,7 @@ public class VendorDtoCreateRequest {
 
     /** Vendor identification number */
     @NotNull(message = "{vendor.id.field.not.null}")
-    @NotEmpty(message = "{vendor.id.field.not.null}")
+    @NotEmpty(message = "{vendor.id.field.not.empty}")
     private String identification;
 
 }

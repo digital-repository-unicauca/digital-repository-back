@@ -23,11 +23,9 @@ public class Contract {
     private String reference;
 
     /** Contract date of signature  */
-    @PastOrPresent
     private LocalDateTime signingDate;
 
     /** Contract initial date */
-    @PastOrPresent
     private LocalDateTime initialDate;
 
     /** Contract final date */

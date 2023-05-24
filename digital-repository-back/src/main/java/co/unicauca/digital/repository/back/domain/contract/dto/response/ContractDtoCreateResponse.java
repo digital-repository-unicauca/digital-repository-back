@@ -19,11 +19,9 @@ public class ContractDtoCreateResponse {
     private String reference;
 
     /** Contract date of signature  */
-    @PastOrPresent
     private LocalDateTime signingDate;
 
     /** Contract initial date */
-    @PastOrPresent
     private LocalDateTime initialDate;
 
     /** Contract final date */
@@ -33,11 +31,9 @@ public class ContractDtoCreateResponse {
     private ContractStatusEnum status;
 
     /** Contract subject */
-    @Column(length = 250)
     private String subject;
 
     /** Contract create User */
-    @Column(length = 250)
     private String createUser;
 
     /** Contract create time  */

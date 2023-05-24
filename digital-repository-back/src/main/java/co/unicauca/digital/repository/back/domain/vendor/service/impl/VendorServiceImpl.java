@@ -119,7 +119,6 @@ public class VendorServiceImpl implements IVendorService {
         VendorDtoCreateResponse vendorDtoCreateResponse = vendorMapper.toDtoCreate(vendorSaved);
 
         return new ResponseHandler<>(200, "Contratista actualizado exitosamente", "Contratista actualizado exitosamente", vendorDtoCreateResponse).getResponse();
-
     }
 
     /**
@@ -132,7 +131,7 @@ public class VendorServiceImpl implements IVendorService {
         if (vendor.isEmpty()) throw new BusinessRuleException("vendor.request.not.found");
         vendorRepository.deleteById(id);
 
-        return new ResponseHandler<>(200, "Contratista eliminado exitosamente", "Contratista eliminado exitosamente", vendorRepository.existsById(id)).getResponse();
+        return new ResponseHandler<>(200, "Contratista eliminado exitosamente", "Contratista eliminado exitosamente", !vendorRepository.existsById(id)).getResponse();
     }
 
     /**
