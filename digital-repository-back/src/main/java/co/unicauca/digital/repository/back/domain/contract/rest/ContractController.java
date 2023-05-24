@@ -35,6 +35,4 @@ public class ContractController {
     public ResponseEntity<Response<ContractDtoResponse>> createContract(@Valid @RequestBody final ContractDtoRequest contractDtoRequest){
         return new ResponseEntity<>(this.contractService.createContract(contractDtoRequest), HttpStatus.OK);
     }
-
-
 }

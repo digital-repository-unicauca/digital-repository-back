@@ -64,7 +64,7 @@ public class InternalNormativeController {
      * @param internalNormativeDtoRequest {@link InternalNormativeDtoRequest} Object with the information to be inserted, received in the body of the request to the service
      * @return {@link Response} Response object for the service, which contains information about the outcome of the transaction.
      */
-    @GetMapping("/update")
+    @PutMapping("/update")
     public ResponseEntity<Response<InternalNormativeDtoResponse>> updateInternalNormative(@Valid @RequestBody final InternalNormativeDtoRequest internalNormativeDtoRequest){
         return new ResponseEntity<>(this.internalNormativeService.updateInternalNormative(internalNormativeDtoRequest), HttpStatus.OK);
     }
@@ -75,7 +75,7 @@ public class InternalNormativeController {
      * @param id {@link Integer} Object with the information to be inserted, received in the body of the request to the service
      * @return {@link Response} Response object for the service, which contains information about the outcome of the transaction.
      */
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Response<Boolean>> deleteInternalNormative(@Valid @PathVariable final Integer id){
         return new ResponseEntity<>(this.internalNormativeService.deleteInternalNormative(id), HttpStatus.OK);
     }
