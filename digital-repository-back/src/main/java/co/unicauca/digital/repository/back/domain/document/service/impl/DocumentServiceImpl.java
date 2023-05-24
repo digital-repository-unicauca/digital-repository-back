@@ -33,7 +33,6 @@ public class DocumentServiceImpl implements IDocumentService {
 
     @Override
     public Response<DocumentDtoResponse> getByIdDocoment(Integer id) {
-
         return null;
     }
 
