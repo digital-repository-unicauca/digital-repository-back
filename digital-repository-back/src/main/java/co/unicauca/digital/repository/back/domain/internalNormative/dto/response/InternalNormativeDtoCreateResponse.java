@@ -4,11 +4,11 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
+/**
+ * Class that defines an entity for the O/R mapping for the input of information from the INTERNAL NORMATIVE table.
+ */
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
-public class InternalNormativeDtoResponse {
-
-    /** InternalNormative id */
-    private Integer id;
+public class InternalNormativeDtoCreateResponse {
 
     /** InternalNormative name */
     private String name;
@@ -21,5 +21,11 @@ public class InternalNormativeDtoResponse {
 
     /** InternalNormative finalTime */
     private LocalDateTime finalTime;
+
+    /** InternalNormative create User */
+    private String createUser;
+
+    /** InternalNormative create time  */
+    private LocalDateTime createTime;
 
 }

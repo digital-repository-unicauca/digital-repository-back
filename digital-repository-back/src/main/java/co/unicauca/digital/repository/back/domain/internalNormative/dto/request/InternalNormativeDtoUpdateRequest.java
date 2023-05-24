@@ -7,10 +7,15 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 /**
- * Class that defines an entity for the O/R mapping for the input of information from the INTERNALNORMATIVE table.
+ * Class that defines an entity for the O/R mapping for the input of information from the INTERNAL NORMATIVE table.
  */
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
-public class InternalNormativeDtoRequest {
+public class InternalNormativeDtoUpdateRequest {
+
+    /** InternalNormative id */
+    @NotNull(message = "{name.field.not.null}")
+    @NotEmpty(message = "{name.field.not.empty}")
+    private Integer id;
 
     /** InternalNormative name */
     @NotNull(message = "{name.field.not.null}")
@@ -29,4 +34,5 @@ public class InternalNormativeDtoRequest {
 
     /** InternalNormative finalTime */
     private LocalDateTime finalTime;
+
 }

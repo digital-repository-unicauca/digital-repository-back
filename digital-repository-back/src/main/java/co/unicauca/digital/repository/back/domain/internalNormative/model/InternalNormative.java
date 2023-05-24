@@ -6,9 +6,9 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
- * Class that defines an entity for the O/R mapping of the INTERNALNORMATIVE table.
+ * Class that defines an entity for the O/R mapping of the INTERNAL NORMATIVE table.
  */
-@Entity @Table(name = "internalnormative")
+@Entity @Table(name = "internalNormative")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
 public class InternalNormative {
 
@@ -30,7 +30,20 @@ public class InternalNormative {
     private LocalDateTime initialTime;
 
     /** InternalNormative finalTime */
-    @Column
     private LocalDateTime finalTime;
+
+    /** InternalNormative create User */
+    @Column(length = 250)
+    private String createUser;
+
+    /** InternalNormative create time  */
+    private LocalDateTime createTime;
+
+    /** InternalNormative last update user */
+    @Column(length = 250)
+    private String updateUser;
+
+    /** InternalNormative last update time */
+    private LocalDateTime updateTime;
 
 }
