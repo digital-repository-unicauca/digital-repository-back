@@ -1,6 +1,6 @@
 package co.unicauca.digital.repository.back.domain.contract.mapper;
 
-import co.unicauca.digital.repository.back.domain.contract.dto.request.ContractDtoRequest;
+import co.unicauca.digital.repository.back.domain.contract.dto.request.ContractDtoCreateRequest;
 import co.unicauca.digital.repository.back.domain.contract.dto.response.ContractDtoResponse;
 import co.unicauca.digital.repository.back.domain.contract.model.Contract;
 import org.mapstruct.Mapper;
@@ -21,6 +21,6 @@ public interface IContractMapper {
     @Mappings({
             @Mapping(target = "reference", source = "reference")
     })
-    Contract toEntity(final ContractDtoRequest requestDto);
+    Contract toEntity(final ContractDtoCreateRequest requestDto);
 
 }

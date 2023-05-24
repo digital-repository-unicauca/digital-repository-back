@@ -1,6 +1,6 @@
 package co.unicauca.digital.repository.back.domain.contract.service.impl;
 
-import co.unicauca.digital.repository.back.domain.contract.dto.request.ContractDtoRequest;
+import co.unicauca.digital.repository.back.domain.contract.dto.request.ContractDtoCreateRequest;
 import co.unicauca.digital.repository.back.domain.contract.dto.response.ContractDtoResponse;
 import co.unicauca.digital.repository.back.domain.contract.mapper.IContractMapper;
 import co.unicauca.digital.repository.back.domain.contract.model.Contract;
@@ -32,10 +32,10 @@ public class ContractServiceImpl implements IContractService {
     }
 
     /**
-     * @see IContractService#createContract(ContractDtoRequest)
+     * @see IContractService#createContract(ContractDtoCreateRequest)
      */
     @Override
-    public Response<ContractDtoResponse> createContract(final ContractDtoRequest contractDtoRequest) {
+    public Response<ContractDtoResponse> createContract(final ContractDtoCreateRequest contractDtoRequest) {
 
         if(isInvalidReferenceFormat(contractDtoRequest.getReference())) throw new BusinessRuleException("bad.request.contract.format");
 

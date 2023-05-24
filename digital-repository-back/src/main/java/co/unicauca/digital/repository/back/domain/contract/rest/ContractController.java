@@ -1,6 +1,6 @@
 package co.unicauca.digital.repository.back.domain.contract.rest;
 
-import co.unicauca.digital.repository.back.domain.contract.dto.request.ContractDtoRequest;
+import co.unicauca.digital.repository.back.domain.contract.dto.request.ContractDtoCreateRequest;
 import co.unicauca.digital.repository.back.domain.contract.dto.response.ContractDtoResponse;
 import co.unicauca.digital.repository.back.domain.contract.service.IContractService;
 import co.unicauca.digital.repository.back.global.response.Response;
@@ -28,11 +28,11 @@ public class ContractController {
     /**
      * API to create a contract
      *
-     * @param contractDtoRequest {@link ContractDtoRequest} Object with the information to be inserted, received in the body of the request to the service
+     * @param contractDtoRequest {@link ContractDtoCreateRequest} Object with the information to be inserted, received in the body of the request to the service
      * @return {@link Response} Response object for the service, which contains information about the outcome of the transaction.
      */
     @PostMapping("")
-    public ResponseEntity<Response<ContractDtoResponse>> createContract(@Valid @RequestBody final ContractDtoRequest contractDtoRequest){
+    public ResponseEntity<Response<ContractDtoResponse>> createContract(@Valid @RequestBody final ContractDtoCreateRequest contractDtoRequest){
         return new ResponseEntity<>(this.contractService.createContract(contractDtoRequest), HttpStatus.OK);
     }
 }

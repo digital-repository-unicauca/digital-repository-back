@@ -3,7 +3,6 @@ package co.unicauca.digital.repository.back.domain.vendor.model;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.FutureOrPresent;
 import java.time.LocalDateTime;
 
 /**
