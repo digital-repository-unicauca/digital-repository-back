@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
@@ -20,7 +21,10 @@ import co.unicauca.digital.repository.back.global.exception.BusinessRuleExceptio
 import co.unicauca.digital.repository.back.global.response.PageableResponse;
 import co.unicauca.digital.repository.back.global.response.Response;
 import co.unicauca.digital.repository.back.global.response.handler.ResponseHandler;
+import org.springframework.stereotype.Service;
 
+@Service
+@Primary
 public class ContractTypeServiceImpl implements IContractTypeService{
 
     /** Object to perform CRUD operations on the ContractType entity */

@@ -3,6 +3,7 @@ package co.unicauca.digital.repository.back.domain.contractualDocumentType.servi
 import co.unicauca.digital.repository.back.domain.contractualDocumentType.dto.request.ContractualDocumentTypeDtoCreateRequest;
 import co.unicauca.digital.repository.back.domain.contractualDocumentType.dto.response.ContractualDocumentTypeDtoCreateResponse;
 import co.unicauca.digital.repository.back.domain.contractualDocumentType.dto.response.ContractualDocumentTypeDtoFindResponse;
+import co.unicauca.digital.repository.back.global.response.PageableResponse;
 import co.unicauca.digital.repository.back.global.response.Response;
 
 /**
@@ -34,5 +35,14 @@ public interface IContractualDocumentTypeService {
      * @return {@link Response} Response object for the service, which contains information about the outcome of the transaction.
      */
     Response<PageableResponse<Object>> getAll(int pageNo, int pageSize);
+
+
+    /**
+     * Service to delete a contractualDocumentTypes
+     *
+     * @param id ID Object with the information to be deleted
+     * @return {@link Response} Response object for the service, which contains information about the outcome of the transaction.
+     */
+    Response<Boolean> deleteContractualDocumentTypes(final int id);
 
 }
