@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/internalNormative")
@@ -18,7 +17,7 @@ import java.util.ArrayList;
 public class InternalNormativeController {
 
     /** Object used to invoke the operations of the IInternalNormativeService interface */
-    private IInternalNormativeService internalNormativeService;
+    private final IInternalNormativeService internalNormativeService;
 
     /**
      * constructor method
