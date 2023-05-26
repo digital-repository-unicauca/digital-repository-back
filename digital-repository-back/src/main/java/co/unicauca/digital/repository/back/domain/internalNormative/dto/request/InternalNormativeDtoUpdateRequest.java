@@ -13,23 +13,23 @@ import java.time.LocalDateTime;
 public class InternalNormativeDtoUpdateRequest {
 
     /** InternalNormative id */
-    @NotNull(message = "{name.field.not.null}")
-    @NotEmpty(message = "{name.field.not.empty}")
+    @NotNull(message = "{InternalNormative.ID.field.not.null}")
+    @NotEmpty(message = "{InternalNormative.ID.field.not.empty}")
     private Integer id;
 
     /** InternalNormative name */
-    @NotNull(message = "{name.field.not.null}")
-    @NotEmpty(message = "{name.field.not.empty}")
+    @NotNull(message = "{InternalNormative.name.field.not.null}")
+    @NotEmpty(message = "{InternalNormative.name.field.not.empty}")
     private String name;
 
     /** InternalNormative isInForce */
-    @NotNull(message = "{isInForce.field.not.null}")
-    @NotEmpty(message = "{isInForce.field.not.empty}")
+    @NotNull(message = "{InternalNormative.isInForce.field.not.null}")
+    @NotEmpty(message = "{InternalNormative.isInForce.field.not.empty}")
     private Boolean isInForce;
 
     /** InternalNormative initialTime */
-    @NotNull(message = "{initialTime.field.not.null}")
-    @NotEmpty(message = "{initialTime.field.not.empty}")
+    @NotNull(message = "{InternalNormative.initialTime.field.not.null}")
+    @NotEmpty(message = "{InternalNormative.initialTime.field.not.empty}")
     private LocalDateTime initialTime;
 
     /** InternalNormative finalTime */

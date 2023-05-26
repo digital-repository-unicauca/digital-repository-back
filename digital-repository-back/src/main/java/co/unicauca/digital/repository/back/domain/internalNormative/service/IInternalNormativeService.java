@@ -7,8 +7,6 @@ import co.unicauca.digital.repository.back.domain.internalNormative.dto.response
 import co.unicauca.digital.repository.back.global.response.PageableResponse;
 import co.unicauca.digital.repository.back.global.response.Response;
 
-import java.util.ArrayList;
-
 /**
  * Interface that allows defining the business operations to be carried out on the Internal Normative entity.
  */
