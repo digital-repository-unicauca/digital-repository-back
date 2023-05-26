@@ -6,9 +6,9 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
- * Class that defines an entity for the O/R mapping of the MODALITYCONTRACTTYPE table.
+ * Class that defines an entity for the O/R mapping of the MODALITY CONTRACT TYPE table.
  */
-@Entity @Table(name = "modalitycontracttype")
+@Entity @Table(name = "modalityContractType")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
 public class ModalityContractType {
 
@@ -17,20 +17,24 @@ public class ModalityContractType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    /** ModalityContractType ModalityId */
-    @ManyToOne(cascade = CascadeType.ALL)
+    // TODO add relationships
+    /* ModalityContractType ModalityId
+     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_modality_modalitycontracttype"), name = "modality_id", referencedColumnName = "id", columnDefinition = "Integer")
     private Modality modalityId;
+    */
 
-    /** ModalityContractType ContractTypeId */
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_contracttype_modalitycontracttype"), name = "contracttype_id", referencedColumnName = "id", columnDefinition = "Integer")
-    private ContractType contractTypeId;
+    /* ModalityContractType ContractTypeId
+    // @ManyToOne(cascade = CascadeType.ALL)
+    // @JoinColumn(foreignKey = @ForeignKey(name = "fk_contracttype_modalitycontracttype"), name = "contracttype_id", referencedColumnName = "id", columnDefinition = "Integer")
+    // private ContractType contractTypeId;
+    */
 
-    /** ModalityContractType InternalNormativeId */
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_internalnormative_modalitycontracttype"), name = "internalnormative_id", referencedColumnName = "id", columnDefinition = "Integer")
-    private InternalNormative internalNormativeId;
+    /* ModalityContractType InternalNormativeId
+    // @ManyToOne(cascade = CascadeType.ALL)
+    // @JoinColumn(foreignKey = @ForeignKey(name = "fk_internalnormative_modalitycontracttype"), name = "internalnormative_id", referencedColumnName = "id", columnDefinition = "Integer")
+    // private InternalNormative internalNormativeId;
+    */
 
     /** ModalityContractType create User */
     @Column(length = 250)

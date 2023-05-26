@@ -1,10 +1,12 @@
 package co.unicauca.digital.repository.back.domain.modalityContractType.service;
 
-import co.unicauca.digital.repository.back.domain.modalityContractType.dto.request.ModalityContractTypeDtoRequest;
-import co.unicauca.digital.repository.back.domain.modalityContractType.dto.response.ModalityContractTypeDtoResponse;
+import co.unicauca.digital.repository.back.domain.modalityContractType.dto.request.ModalityContractTypeDtoCreateRequest;
+import co.unicauca.digital.repository.back.domain.modalityContractType.dto.request.ModalityContractTypeDtoUpdateRequest;
+import co.unicauca.digital.repository.back.domain.modalityContractType.dto.response.ModalityContractTypeDtoCreateResponse;
+import co.unicauca.digital.repository.back.domain.modalityContractType.dto.response.ModalityContractTypeDtoFindResponse;
+import co.unicauca.digital.repository.back.global.response.PageableResponse;
 import co.unicauca.digital.repository.back.global.response.Response;
 
-import java.util.ArrayList;
 
 /**
  * Interface that allows defining the business operations to be carried out on the ModalityContractType entity.
@@ -12,40 +14,42 @@ import java.util.ArrayList;
 public interface IModalityContractTypeService {
 
     /**
-     * Service to save a modalitycontracttype
+     * Service to save a Modality Contract Type
      *
-     * @param modalityContractTypeDtoRequest {@link ModalityContractTypeDtoRequest} Object with the information to be inserted, received in the body of the request to the service
+     * @param modalityContractTypeDtoCreateRequest {@link ModalityContractTypeDtoCreateRequest} Object with the information to be inserted, received in the body of the request to the service
      * @return {@link Response} Response object for the service, which contains information about the outcome of the transaction.
      */
-    Response<ModalityContractTypeDtoResponse> createModalityContractType(final ModalityContractTypeDtoRequest modalityContractTypeDtoRequest);
+    Response<ModalityContractTypeDtoCreateResponse> createModalityContractType(final ModalityContractTypeDtoCreateRequest modalityContractTypeDtoCreateRequest);
 
     /**
-     * Service to get a modalitycontracttype for id
+     * Service to get a Modality Contract Type for id
      *
-     * @param id {@link Integer} Object with the information to be inserted, received in the body of the request to the service
+     * @param id {@link Integer} ID Object to do the search
      * @return {@link Response} Response object for the service, which contains information about the outcome of the transaction.
      */
-    Response<ModalityContractTypeDtoResponse> getById(final Integer id);
+    Response<ModalityContractTypeDtoFindResponse> getById(final Integer id);
 
     /**
-     * Service to get all records from modalitycontracttype table
+     * Service to get all records from Modality Contract Type table
      *
+     * @param pageNo Pagination Page number
+     * @param pageSize Pagination Page size
      * @return {@link Response} Response object for the service, which contains information about the outcome of the transaction.
      */
-    Response<ArrayList<ModalityContractTypeDtoResponse>> getAll();
+    Response<PageableResponse<Object>> getAll(int pageNo, int pageSize);
 
     /**
-     * Service to update a modalitycontracttype
+     * Service to update a Modality Contract Type
      *
-     * @param modalityContractTypeDtoRequest {@link ModalityContractTypeDtoRequest} Object with the information to be inserted, received in the body of the request to the service
+     * @param modalityContractTypeDtoUpdateRequest {@link ModalityContractTypeDtoUpdateRequest} Object with the information to be inserted, received in the body of the request to the service
      * @return {@link Response} Response object for the service, which contains information about the outcome of the transaction.
      */
-    Response<ModalityContractTypeDtoResponse> updateModalityContractType(final ModalityContractTypeDtoRequest modalityContractTypeDtoRequest);
+    Response<ModalityContractTypeDtoCreateResponse> updateModalityContractType(final ModalityContractTypeDtoUpdateRequest modalityContractTypeDtoUpdateRequest);
 
     /**
-     * Service to delete a modalitycontracttype for id
+     * Service to delete a Modality Contract Type for id
      *
-     * @param id {@link Integer} Object with the information to be inserted, received in the body of the request to the service
+     * @param id {@link Integer} ID Object with the information to be deleted
      * @return {@link Response} Response object for the service, which contains information about the outcome of the transaction.
      */
     Response<Boolean> deleteModalityContractType(final Integer id);

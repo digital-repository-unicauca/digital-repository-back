@@ -3,19 +3,19 @@ package co.unicauca.digital.repository.back.domain.modalityContractType.dto.resp
 import lombok.*;
 
 /**
- * Class that defines an entity for the O/R mapping for the input of information from the MODALITYCONTRACTTYPE table.
+ * Class that defines an entity for the O/R mapping for the input of information from the MODALITY CONTRACT TYPE table.
  */
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
-public class ModalityContractTypeDtoResponse {
+public class ModalityContractTypeDtoFindResponse {
     /** ModalityContractType id */
     private Integer id;
 
     /** ModalityContractType ModalityId */
-    private Modality modalityId;
+    private Integer modalityId;
 
     /** ModalityContractType ContractTypeId */
-    private ContractType contractTypeId;
+    private Integer contractTypeId;
 
     /** ModalityContractType InternalNormativeId */
-    private InternalNormative internalNormativeId;
+    private Integer internalNormativeId;
 }

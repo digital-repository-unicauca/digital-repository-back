@@ -1,8 +1,11 @@
 package co.unicauca.digital.repository.back.domain.modalityContractType.rest;
 
-import co.unicauca.digital.repository.back.domain.modalityContractType.dto.request.ModalityContractTypeDtoRequest;
-import co.unicauca.digital.repository.back.domain.modalityContractType.dto.response.ModalityContractTypeDtoResponse;
+import co.unicauca.digital.repository.back.domain.modalityContractType.dto.request.ModalityContractTypeDtoCreateRequest;
+import co.unicauca.digital.repository.back.domain.modalityContractType.dto.request.ModalityContractTypeDtoUpdateRequest;
+import co.unicauca.digital.repository.back.domain.modalityContractType.dto.response.ModalityContractTypeDtoCreateResponse;
+import co.unicauca.digital.repository.back.domain.modalityContractType.dto.response.ModalityContractTypeDtoFindResponse;
 import co.unicauca.digital.repository.back.domain.modalityContractType.service.IModalityContractTypeService;
+import co.unicauca.digital.repository.back.global.response.PageableResponse;
 import co.unicauca.digital.repository.back.global.response.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +15,7 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("/modalitycontracttype")
+@RequestMapping("/modalityContractType")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ModalityContractTypeController {
 
@@ -27,55 +30,57 @@ public class ModalityContractTypeController {
     }
 
     /**
-     * API to create a modalitycontracttype
+     * API to create a modality contract type
      *
-     * @param modalityContractTypeDtoRequest {@link ModalityContractTypeDtoRequest} Object with the information to be inserted, received in the body of the request to the service
+     * @param modalityContractTypeDtoCreateRequest {@link ModalityContractTypeDtoCreateRequest} Object with the information to be inserted, received in the body of the request to the service
      * @return {@link Response} Response object for the service, which contains information about the outcome of the transaction.
      */
-    @PostMapping("/create")
-    public ResponseEntity<Response<ModalityContractTypeDtoResponse>> createModalityContractType(@Valid @RequestBody final ModalityContractTypeDtoRequest modalityContractTypeDtoRequest){
-        return new ResponseEntity<>(this.modalityContractTypeService.createModalityContractType(modalityContractTypeDtoRequest), HttpStatus.OK);
+    @PostMapping("")
+    public ResponseEntity<Response<ModalityContractTypeDtoCreateResponse>> createModalityContractType(@Valid @RequestBody final ModalityContractTypeDtoCreateRequest modalityContractTypeDtoCreateRequest){
+        return new ResponseEntity<>(this.modalityContractTypeService.createModalityContractType(modalityContractTypeDtoCreateRequest), HttpStatus.OK);
     }
 
     /**
-     * API to get a modalitycontracttype by id
+     * API to get a modality contract type by id
      *
-     * @param id {@link Integer} Object with the information to be inserted, received in the body of the request to the service
+     * @param id {@link Integer} Object ID
      * @return {@link Response} Response object for the service, which contains information about the outcome of the transaction.
      */
-    @GetMapping("/get/{id}")
-    public ResponseEntity<Response<ModalityContractTypeDtoResponse>> getById(@Valid @PathVariable final Integer id){
+    @GetMapping("/{id}")
+    public ResponseEntity<Response<ModalityContractTypeDtoFindResponse>> getById(@Valid @PathVariable final Integer id){
         return new ResponseEntity<>(this.modalityContractTypeService.getById(id), HttpStatus.OK);
     }
 
     /**
-     * API to get all records from modalitycontracttype table
+     * API to get all records from modality contract type table
      *
      * @return {@link Response} Response object for the service, which contains information about the outcome of the transaction.
      */
-    @GetMapping("/get")
-    public ResponseEntity<Response<ArrayList<ModalityContractTypeDtoResponse>>> getAll() {
-        return new ResponseEntity<>(this.modalityContractTypeService.getAll(), HttpStatus.OK);
+    @GetMapping("")
+    public ResponseEntity<Response<PageableResponse<Object>>> getAll(
+            @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
+            @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize) {
+        return new ResponseEntity<>(this.modalityContractTypeService.getAll(pageNo, pageSize), HttpStatus.OK);
     }
 
     /**
-     * API to update a modalitycontracttype
+     * API to update a modality contract type
      *
-     * @param modalityContractTypeDtoRequest {@link ModalityContractTypeDtoRequest} Object with the information to be inserted, received in the body of the request to the service
+     * @param modalityContractTypeDtoUpdateRequest {@link ModalityContractTypeDtoUpdateRequest} Object with the information to be updated, received in the body of the request to the service
      * @return {@link Response} Response object for the service, which contains information about the outcome of the transaction.
      */
-    @PutMapping("/update")
-    public ResponseEntity<Response<ModalityContractTypeDtoResponse>> updateModalityContractType(@Valid @RequestBody final ModalityContractTypeDtoRequest modalityContractTypeDtoRequest){
-        return new ResponseEntity<>(this.modalityContractTypeService.updateModalityContractType(modalityContractTypeDtoRequest), HttpStatus.OK);
+    @PatchMapping("")
+    public ResponseEntity<Response<ModalityContractTypeDtoCreateResponse>> updateModalityContractType(@Valid @RequestBody final ModalityContractTypeDtoUpdateRequest modalityContractTypeDtoUpdateRequest){
+        return new ResponseEntity<>(this.modalityContractTypeService.updateModalityContractType(modalityContractTypeDtoUpdateRequest), HttpStatus.OK);
     }
 
     /**
-     * API to delete a modalitycontracttype by id
+     * API to delete a modality contract type by id
      *
-     * @param id {@link Integer} Object with the information to be inserted, received in the body of the request to the service
+     * @param id {@link Integer} Object ID
      * @return {@link Response} Response object for the service, which contains information about the outcome of the transaction.
      */
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<Response<Boolean>> deleteModalityContractType(@Valid @PathVariable final Integer id){
         return new ResponseEntity<>(this.modalityContractTypeService.deleteModalityContractType(id), HttpStatus.OK);
     }
