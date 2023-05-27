@@ -2,6 +2,7 @@ package co.unicauca.digital.repository.back.domain.contract.mapper;
 
 import co.unicauca.digital.repository.back.domain.contract.dto.request.ContractDtoCreateRequest;
 import co.unicauca.digital.repository.back.domain.contract.dto.response.ContractDtoCreateResponse;
+import co.unicauca.digital.repository.back.domain.contract.dto.response.ContractDtoFindContractualFoldersResponse;
 import co.unicauca.digital.repository.back.domain.contract.dto.response.ContractDtoFindResponse;
 import co.unicauca.digital.repository.back.domain.contract.model.Contract;
 import org.mapstruct.Mapper;
@@ -45,5 +46,13 @@ public interface IContractMapper {
             @Mapping(target = "subject", source = "subject")
     })
     Contract toEntityCreate(final ContractDtoCreateRequest contractDtoCreateRequest);
+
+
+    @Mappings({
+            @Mapping(target = "id", source = "id"),
+            @Mapping(target = "reference", source = "reference"),
+            @Mapping(target = "signingDate", source = "signingDate")
+    })
+    ContractDtoFindContractualFoldersResponse toDtoFindContractualFolders(final Contract contract);
 
 }
