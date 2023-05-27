@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 
 /**
- * This class defines the an entity for th O/R mapping of the Modality table
+ * This class defines the entity for th O/R mapping of the Modality table
  */
 @Entity
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder

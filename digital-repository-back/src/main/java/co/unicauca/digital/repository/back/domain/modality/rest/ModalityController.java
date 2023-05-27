@@ -29,7 +29,7 @@ import co.unicauca.digital.repository.back.global.response.Response;
 public class ModalityController {
     
     /** Object used to invoke the operations of the IModalityService interface */
-    private IModalityService modalityService;
+    private final IModalityService modalityService;
 
     /*Constructor */
 
@@ -48,7 +48,7 @@ public class ModalityController {
     }
 
     /**
-     * Api Method to get all modalitys
+     * Api Method to get all modalities
      * @param pageNo Pagination Page number
      * @param pageSize Pagination Page size 
      * @return {@link Response} Response object for the service, which contains information about the outcome of the transaction.

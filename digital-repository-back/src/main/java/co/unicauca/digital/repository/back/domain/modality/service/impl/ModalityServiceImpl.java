@@ -24,7 +24,7 @@ import co.unicauca.digital.repository.back.global.response.Response;
 import co.unicauca.digital.repository.back.global.response.handler.ResponseHandler;
 
 
-/** Class in charge of implementing the IModalityServide interface {@link IModalityService} */
+/** Class in charge of implementing the IModalityService interface {@link IModalityService} */
 @Service
 @Primary
 public class ModalityServiceImpl implements IModalityService{
@@ -32,7 +32,7 @@ public class ModalityServiceImpl implements IModalityService{
     /** Object to perform CRUD operations on the Modality entity */
     private final IModalityRepository modalityRepository;
 
-    /** Mapping object for mapping the modalitys */
+    /** Mapping object for mapping the modalities */
     private final IModalityMapper modalityMapper;
 
 
