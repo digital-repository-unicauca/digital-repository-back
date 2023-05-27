@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 /**
  * Class that defines an entity for the O/R mapping of the MODALITY CONTRACT TYPE table.
  */
-@Entity @Table(name = "modalityContractType")
+@Entity
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
 public class ModalityContractType {
 
