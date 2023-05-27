@@ -19,20 +19,14 @@ public class ModalityContractType {
 
     // TODO add relationships
     /* ModalityContractType ModalityId
-     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_modality_modalitycontracttype"), name = "modality_id", referencedColumnName = "id", columnDefinition = "Integer")
     private Modality modalityId;
     */
 
     /* ModalityContractType ContractTypeId
-    // @ManyToOne(cascade = CascadeType.ALL)
-    // @JoinColumn(foreignKey = @ForeignKey(name = "fk_contracttype_modalitycontracttype"), name = "contracttype_id", referencedColumnName = "id", columnDefinition = "Integer")
     // private ContractType contractTypeId;
     */
 
     /* ModalityContractType InternalNormativeId
-    // @ManyToOne(cascade = CascadeType.ALL)
-    // @JoinColumn(foreignKey = @ForeignKey(name = "fk_internalnormative_modalitycontracttype"), name = "internalnormative_id", referencedColumnName = "id", columnDefinition = "Integer")
     // private InternalNormative internalNormativeId;
     */
 
