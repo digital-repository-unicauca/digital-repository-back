@@ -1,6 +1,5 @@
 package co.unicauca.digital.repository.back.domain.collection.model;
 
-import co.unicauca.digital.repository.back.domain.document.model.Document;
 import lombok.*;
 
 import javax.persistence.*;

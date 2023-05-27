@@ -1,6 +1,5 @@
 package co.unicauca.digital.repository.back.domain.collection.dto.response;
 
-import co.unicauca.digital.repository.back.domain.document.model.Document;
 import lombok.*;
 
 import java.time.LocalDateTime;

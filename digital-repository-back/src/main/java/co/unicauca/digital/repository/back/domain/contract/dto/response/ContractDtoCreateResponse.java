@@ -3,10 +3,8 @@ package co.unicauca.digital.repository.back.domain.contract.dto.response;
 import co.unicauca.digital.repository.back.domain.contract.model.ContractStatusEnum;
 import lombok.*;
 
-import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDateTime;
 
 /**
