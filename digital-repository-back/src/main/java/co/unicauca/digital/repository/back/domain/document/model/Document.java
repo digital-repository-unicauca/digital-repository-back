@@ -56,11 +56,10 @@ public class Document {
     /** Document update time */
     private LocalDateTime updateTime;
 
-    /*
-    @ManyToOne
-    @JoinColumn(name = "collectionId")
-    private Collection collection;
-     */
+
+//    @ManyToOne
+//    @JoinColumn(name = "collectionId")
+//    private Collection collection;
 
 
 }

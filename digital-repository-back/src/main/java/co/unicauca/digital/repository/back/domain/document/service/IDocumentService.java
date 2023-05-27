@@ -29,10 +29,10 @@ public interface IDocumentService {
      * Service to get all documents with pagination support.
      *
      * @param pageNumber Pagination page number.
-     * @param pagezise Pagination page size.
+     * @param pageSize Pagination page size.
      * @return Response object for the service, containing information about the transaction outcome.
      */
-    Response<PageableResponse<Object>> getAll(int pageNumber, int pagezise);
+    Response<PageableResponse<Object>> getAll(int pageNumber, int pageSize);
 
     /**
      * Service to delete a document by ID.

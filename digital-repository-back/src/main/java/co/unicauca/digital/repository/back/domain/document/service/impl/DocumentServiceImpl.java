@@ -34,21 +34,22 @@ public class DocumentServiceImpl implements IDocumentService {
         Document document = this.documentMapper.toEntity(documentDtoRequest);
         Document entitySave = this.documentRepository.save(document);
         DocumentDtoResponse documentDtoResponse = this.documentMapper.toDto(entitySave);
-        return new ResponseHandler<>(200,"Documento guardado con exito", "",documentDtoResponse).getResponse();
+        return new ResponseHandler<>(200,"Documento guardado con éxito", "",documentDtoResponse).getResponse();
     }
 
     @Override
     public Response<DocumentDtoResponse> getByIdDocument(Integer id) {
-        if(documentExist(id)){
+        Optional<Document> documentFound = documentRepository.findById(id);
+        if(documentFound.isEmpty()){
             throw new BusinessRuleException("document.request.not.found");
         }
-        DocumentDtoResponse documentDtoResponse = this.documentMapper.toDto(documentRepository.findById(id).get());
+        DocumentDtoResponse documentDtoResponse = this.documentMapper.toDto(documentFound.get());
         return new ResponseHandler<>(200,"Documento encontrado", "",documentDtoResponse).getResponse();
     }
 
     @Override
-    public Response<PageableResponse<Object>> getAll(int pageNumber, int pagezise) {
-        PageRequest pageRequest = PageRequest.of(pageNumber,pagezise);
+    public Response<PageableResponse<Object>> getAll(int pageNumber, int pageSize) {
+        PageRequest pageRequest = PageRequest.of(pageNumber,pageSize);
         Page<Document> page = this.documentRepository.findAll(pageRequest);
         List<Object> documentList = page.get().map(
                 this.documentMapper::toDto
