@@ -33,7 +33,7 @@ public class CollectionController {
     }
 
     @GetMapping
-    public ResponseEntity<Response<PageableResponse<Object>>> getAll(@RequestParam(defaultValue = "pageNumber") int pageNumber, @RequestParam(defaultValue = "pageZise") int pageSize){
+    public ResponseEntity<Response<PageableResponse<Object>>> getAll(@RequestParam(defaultValue = "pageNumber") int pageNumber, @RequestParam(defaultValue = "pageSize") int pageSize){
         return new ResponseEntity<>(this.collectionService.getAll(pageNumber,pageSize),HttpStatus.OK);
     }
 

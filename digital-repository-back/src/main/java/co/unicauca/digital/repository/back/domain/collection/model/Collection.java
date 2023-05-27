@@ -6,7 +6,6 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="collection")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -25,14 +24,14 @@ public class Collection {
     private String updateUser;
     private LocalDateTime updateTime;
 
-    /*
-    @OneToMany(mappedBy = "collection", cascade = CascadeType.ALL)
-    private List<Document> documents;
 
-    @ManyToOne(mappeBy = "collections",cascade = CascadeType.ALL)
-    private ContractualDocument contractualDocument;
+//    @OneToMany(mappedBy = "collection", cascade = CascadeType.ALL)
+//    private List<Document> documents;
+//
+//    @ManyToOne(mappedBy = "collections",cascade = CascadeType.ALL)
+//    private ContractualDocument contractualDocument;
+//
+//    @ManyToOne(mappedBy = "collections",cascade = CascadeType.ALL)
+//    private Contract contract;
 
-    @ManyToOne(mappeBy = "collections",cascade = CascadeType.ALL)
-    private Contract contract;
-     */
 }

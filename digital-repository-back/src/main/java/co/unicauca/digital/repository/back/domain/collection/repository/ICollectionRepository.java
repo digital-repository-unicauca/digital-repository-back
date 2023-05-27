@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ICollectionRepository extends JpaRepository<Collection,Integer> {
 
-    Page<Collection> findAll(Pageable pegeable);
+    Page<Collection> findAll(Pageable pageable);
 
 }

@@ -35,21 +35,23 @@ public class CollectionServiceImpl implements ICollectionService {
         Collection entitySave = this.collectionRepository.save(collection);
         CollectionDtoResponse collectionDtoResponse = this.collectionMapper.toDto(entitySave);
 
-        return new ResponseHandler<>(200,"Coleccion guardado con exito", "",collectionDtoResponse).getResponse();
+        return new ResponseHandler<>(200,"Colección guardado con éxito", "",collectionDtoResponse).getResponse();
     }
 
     @Override
     public Response<CollectionDtoResponse> getByIdCollection(Integer id) {
-        if(!collectionExist(id)){
+        Optional<Collection> collectionFound = collectionRepository.findById(id);
+        if(collectionFound.isEmpty()){
             throw new BusinessRuleException("collection.request.not.found");
         }
-        CollectionDtoResponse collectionDtoResponse = this.collectionMapper.toDto(collectionRepository.findById(id).get());
-        return new ResponseHandler<>(200,"Coleccion encontrada", "",collectionDtoResponse).getResponse();
+
+        CollectionDtoResponse collectionDtoResponse = this.collectionMapper.toDto(collectionFound.get());
+        return new ResponseHandler<>(200,"Colección encontrada", "",collectionDtoResponse).getResponse();
     }
 
     @Override
-    public Response<PageableResponse<Object>> getAll(int pageNumber, int pagezise) {
-        PageRequest pageRequest = PageRequest.of(pageNumber,pagezise);
+    public Response<PageableResponse<Object>> getAll(int pageNumber, int pageSize) {
+        PageRequest pageRequest = PageRequest.of(pageNumber,pageSize);
         Page<Collection> page = this.collectionRepository.findAll(pageRequest);
         List<Object> documentList = page.get().map(
                 this.collectionMapper::toDto
@@ -76,12 +78,12 @@ public class CollectionServiceImpl implements ICollectionService {
                 .isLocalRequerid(collection.get().isLocalRequerid())
                 .createUser(collection.get().getCreateUser())
                 .createTime(collection.get().getCreateTime())
-                .updateUser(collectionDtoRequest.getUpdateUser())
+//                .updateUser(collectionDtoRequest.getUpdateUser())
                 .updateTime(LocalDateTime.now())
                 .build();
         Collection collectionSave = this.collectionRepository.save(collectionUpdate);
         CollectionDtoResponse collectionDtoResponse = this.collectionMapper.toDto(collectionSave);
-        return new ResponseHandler<>(200, "Coleccion actualizada exitosamente", "", collectionDtoResponse).getResponse();
+        return new ResponseHandler<>(200, "Colección actualizada exitosamente", "", collectionDtoResponse).getResponse();
     }
 
     @Override
@@ -90,10 +92,10 @@ public class CollectionServiceImpl implements ICollectionService {
         if(collection.isEmpty())
             throw new BusinessRuleException("collection.request.not.found");
         this.collectionRepository.deleteById(id);
-        return new ResponseHandler<>(200,"Coleccion Eliminada", "",!collectionExist(id)).getResponse();
+        return new ResponseHandler<>(200,"Colección Eliminada", "", collectionExist(id)).getResponse();
     }
 
     private boolean collectionExist(final Integer id){
-        return this.collectionRepository.existsById(id);
+        return !this.collectionRepository.existsById(id);
     }
 }

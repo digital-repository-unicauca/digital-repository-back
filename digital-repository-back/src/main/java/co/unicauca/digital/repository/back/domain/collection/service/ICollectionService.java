@@ -29,10 +29,10 @@ public interface ICollectionService {
      * Service to get all collections
      *
      * @param pageNumber Pagination page number
-     * @param pagezise Pagination page size
+     * @param pageSize Pagination page size
      * @return Response object for the service, containing information about the transaction outcome.
      */
-    Response<PageableResponse<Object>> getAll(int pageNumber, int pagezise);
+    Response<PageableResponse<Object>> getAll(int pageNumber, int pageSize);
 
     /**
      * Service to update a collection
