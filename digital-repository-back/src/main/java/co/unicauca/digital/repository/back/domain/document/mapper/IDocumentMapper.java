@@ -5,7 +5,7 @@ import co.unicauca.digital.repository.back.domain.document.dto.response.Document
 import co.unicauca.digital.repository.back.domain.document.model.Document;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+
 import org.mapstruct.Mappings;
 
 import java.util.List;

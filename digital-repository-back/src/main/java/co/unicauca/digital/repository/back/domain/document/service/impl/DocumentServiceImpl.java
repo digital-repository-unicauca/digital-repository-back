@@ -39,7 +39,7 @@ public class DocumentServiceImpl implements IDocumentService {
 
     @Override
     public Response<DocumentDtoResponse> getByIdDocument(Integer id) {
-        if(!documentExist(id)){
+        if(documentExist(id)){
             throw new BusinessRuleException("document.request.not.found");
         }
         DocumentDtoResponse documentDtoResponse = this.documentMapper.toDto(documentRepository.findById(id).get());
@@ -69,10 +69,10 @@ public class DocumentServiceImpl implements IDocumentService {
         if(document.isEmpty())
             throw new BusinessRuleException("document.request.not.found");
         this.documentRepository.deleteById(id);
-        return new ResponseHandler<>(200,"Documento Eliminado", "",!documentExist(id)).getResponse();
+        return new ResponseHandler<>(200,"Documento Eliminado", "", documentExist(id)).getResponse();
     }
 
     private boolean documentExist(final Integer id){
-        return this.documentRepository.existsById(id);
+        return !this.documentRepository.existsById(id);
     }
 }
