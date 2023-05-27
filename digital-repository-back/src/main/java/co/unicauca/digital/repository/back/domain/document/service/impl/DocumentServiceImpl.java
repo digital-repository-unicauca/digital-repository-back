@@ -70,10 +70,6 @@ public class DocumentServiceImpl implements IDocumentService {
         if(document.isEmpty())
             throw new BusinessRuleException("document.request.not.found");
         this.documentRepository.deleteById(id);
-        return new ResponseHandler<>(200,"Documento Eliminado", "", documentExist(id)).getResponse();
-    }
-
-    private boolean documentExist(final Integer id){
-        return !this.documentRepository.existsById(id);
+        return new ResponseHandler<>(200,"Documento Eliminado", "", this.documentRepository.existsById(id)).getResponse();
     }
 }
