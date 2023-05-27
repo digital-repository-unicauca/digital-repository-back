@@ -29,7 +29,7 @@ import co.unicauca.digital.repository.back.global.response.Response;
 public class ContractTypeController {
     
     /** Object used to invoke the operations of the IModalityService interface */
-    private IContractTypeService contractTypeService;
+    private final IContractTypeService contractTypeService;
 
     /*Constructor */
 

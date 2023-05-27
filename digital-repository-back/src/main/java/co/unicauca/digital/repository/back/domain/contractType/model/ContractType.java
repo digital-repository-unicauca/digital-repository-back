@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 
 /**
- * This class defines the an entity for th O/R mapping of the ContractType table
+ * This class defines the entity for th O/R mapping of the ContractType table
  */
 @Entity
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
