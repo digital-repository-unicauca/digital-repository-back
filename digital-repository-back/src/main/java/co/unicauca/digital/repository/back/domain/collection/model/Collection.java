@@ -1,9 +1,12 @@
 package co.unicauca.digital.repository.back.domain.collection.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -15,7 +18,14 @@ public class Collection {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer parentId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Collection parent;
+
+    @Singular
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "parent")
+    @JsonBackReference
+    private List<Collection> sons;
     private boolean isLocalRequerid;
     @Column(length = 250)
     private String createUser;
