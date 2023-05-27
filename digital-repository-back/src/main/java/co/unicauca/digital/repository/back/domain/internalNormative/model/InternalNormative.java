@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 /**
  * Class that defines an entity for the O/R mapping of the INTERNAL NORMATIVE table.
  */
-@Entity @Table(name = "internalNormative")
+@Entity
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
 public class InternalNormative {
 
