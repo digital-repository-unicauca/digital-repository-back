@@ -74,15 +74,24 @@ public class ListContractualFolders implements IListContractualFolders {
     }
 
     @Override
-    public Response<List<Object>> getContractualFoldersByFilter(int pageNo, int pageSize, String filter, String search) {
-//        PageRequest pageRequest = PageRequest.of(pageNo, pageSize);
-        List<ContractDtoFindContractualFolders> responsePage = findByFilterAndSearchPattern.findByFilterAndSearchPattern(filter, search);
+    public Response<PageableResponse<Object>> getContractualFoldersByFilter(int pageNo, int pageSize, String filter, String search) {
+        PageRequest pageRequest = PageRequest.of(pageNo, pageSize);
+        Page<ContractDtoFindContractualFolders> responsePage = findByFilterAndSearchPattern.findByFilterAndSearchPattern(filter, search, pageRequest);
 
-        List<Object> contractDtoFindContractualFolderResponse = responsePage.stream()
+        List<Object> contractDtoFindContractualFolderResponse = responsePage.get()
                 .map(
                         this.iContractDtoFindContractualFoldersMapper::toDtoFind
                 ).collect(Collectors.toList());
 
-        return new ResponseHandler<>(200, "Exitoso", "Exitoso", contractDtoFindContractualFolderResponse).getResponse();
+        PageableResponse<Object> response = PageableResponse.builder()
+                .data(contractDtoFindContractualFolderResponse)
+                .pageNo(responsePage.getNumber())
+                .pageSize(responsePage.getSize())
+                .totalElements(responsePage.getTotalElements())
+                .totalPages(responsePage.getTotalPages())
+                .last(responsePage.isLast())
+                .build();
+
+        return new ResponseHandler<>(200, "Exitoso", "Exitoso", response).getResponse();
     }
 }

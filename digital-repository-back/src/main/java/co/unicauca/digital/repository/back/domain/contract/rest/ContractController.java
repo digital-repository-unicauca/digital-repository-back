@@ -114,7 +114,7 @@ public class ContractController {
      * @return {@link Response} Response object for the service, which contains information about the outcome of the transaction.
      */
     @GetMapping("contractualFoldersFilterPattern")
-    public ResponseEntity<Response<List<Object>>> getContractualFoldersByFilter(
+    public ResponseEntity<Response<PageableResponse<Object>>> getContractualFoldersByFilter(
             @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
             @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize,
             @RequestParam() String filter,

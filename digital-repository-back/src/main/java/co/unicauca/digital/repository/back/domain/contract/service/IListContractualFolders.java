@@ -26,5 +26,5 @@ public interface IListContractualFolders {
      * @param search Word to search like
      * @return {@link Response} Response object for the service, which contains information about the outcome of the transaction.
      */
-    Response<List<Object>> getContractualFoldersByFilter(int pageNo, int pageSize, String filter, String search);
+    Response<PageableResponse<Object>> getContractualFoldersByFilter(int pageNo, int pageSize, String filter, String search);
 }

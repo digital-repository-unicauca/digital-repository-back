@@ -1,6 +1,8 @@
 package co.unicauca.digital.repository.back.domain.contract.repository;
 
 import co.unicauca.digital.repository.back.domain.contract.model.ContractDtoFindContractualFolders;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -17,30 +19,22 @@ public interface IContractFilterAndSearchPatternRepository extends JpaRepository
      */
     @Query(
             value =
-                    "select " +
-                            " CON.id, " +
-                            " CON.reference, " +
-                            " MODA.name as modality, " +
-                            " CONTYPE.name as contractType, " +
-                            " VEN.identification as vendor, " +
-                            " year(CON.signingDate) as signingYear " +
-                            "from " +
-                            " contract CON, " +
-                            " modality MODA, " +
-                            " contracttype CONTYPE, " +
-                            " modalitycontracttype CONTYPEMODA, " +
-                            " vendor VEN " +
-                            "where " +
-                            " CONTYPEMODA.modalityId = MODA.id AND  " +
-                            "    CONTYPEMODA.contractTypeId = CONTYPE.id AND " +
-                            "    VEN.id = CON.vendorId AND " +
-                            " ( " +
-                            "        (:filter = 'REFERENCE' AND CON.reference LIKE CONCAT('%', :search, '%')) or " +
-                            "        (:filter = 'MODALITY' AND MODA.name  LIKE CONCAT('%', :search, '%')) or " +
-                            "        (:filter = 'TYPE' AND CONTYPE.name  LIKE CONCAT('%', :search, '%')) or " +
-                            "        (:filter = 'VENDOR' AND VEN.identification LIKE CONCAT('%', :search, '%')) or " +
-                            "        (:filter = 'SUPERSCRIBE-YEAR' AND year(CON.signingDate) LIKE CONCAT('%', :search, '%')) " +
-                            "    );",
-            nativeQuery = true)
-    List<ContractDtoFindContractualFolders> findByFilterAndSearchPattern(String filter, String search);
+                    "SELECT CON.id, CON.reference, MODA.name AS modality, CONTYPE.name AS contractType, VEN.identification AS vendor, YEAR(CON.signingDate) AS signingYear " +
+                            "FROM contract CON, modality MODA, contracttype CONTYPE, modalitycontracttype CONTYPEMODA, vendor VEN " +
+                            "WHERE CONTYPEMODA.modalityId = MODA.id AND CONTYPEMODA.contractTypeId = CONTYPE.id AND VEN.id = CON.vendorId AND " +
+                            "((:filter = 'REFERENCE' AND CON.reference LIKE CONCAT('%', :search, '%')) OR " +
+                            "(:filter = 'MODALITY' AND MODA.name LIKE CONCAT('%', :search, '%')) OR " +
+                            "(:filter = 'TYPE' AND CONTYPE.name LIKE CONCAT('%', :search, '%')) OR " +
+                            "(:filter = 'VENDOR' AND VEN.identification LIKE CONCAT('%', :search, '%')) OR " +
+                            "(:filter = 'SUPERSCRIBE-YEAR' AND YEAR(CON.signingDate) LIKE CONCAT('%', :search, '%')))",
+            countQuery = "SELECT COUNT(*) " +
+                    "FROM contract CON, modality MODA, contracttype CONTYPE, modalitycontracttype CONTYPEMODA, vendor VEN " +
+                    "WHERE CONTYPEMODA.modalityId = MODA.id AND CONTYPEMODA.contractTypeId = CONTYPE.id AND VEN.id = CON.vendorId AND " +
+                    "((:filter = 'REFERENCE' AND CON.reference LIKE CONCAT('%', :search, '%')) OR " +
+                    "(:filter = 'MODALITY' AND MODA.name LIKE CONCAT('%', :search, '%')) OR " +
+                    "(:filter = 'TYPE' AND CONTYPE.name LIKE CONCAT('%', :search, '%')) OR " +
+                    "(:filter = 'VENDOR' AND VEN.identification LIKE CONCAT('%', :search, '%')) OR " +
+                    "(:filter = 'SUPERSCRIBE-YEAR' AND YEAR(CON.signingDate) LIKE CONCAT('%', :search, '%')))"
+            , nativeQuery = true)
+    Page<ContractDtoFindContractualFolders> findByFilterAndSearchPattern(String filter, String search, Pageable pageable);
 }
