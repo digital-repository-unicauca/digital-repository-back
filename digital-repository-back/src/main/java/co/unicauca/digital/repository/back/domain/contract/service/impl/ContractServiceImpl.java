@@ -8,6 +8,8 @@ import co.unicauca.digital.repository.back.domain.contract.mapper.IContractMappe
 import co.unicauca.digital.repository.back.domain.contract.model.Contract;
 import co.unicauca.digital.repository.back.domain.contract.repository.IContractRepository;
 import co.unicauca.digital.repository.back.domain.contract.service.IContractService;
+import co.unicauca.digital.repository.back.domain.modalityContractType.model.ModalityContractType;
+import co.unicauca.digital.repository.back.domain.modalityContractType.repository.IModalityContractTypeRepository;
 import co.unicauca.digital.repository.back.domain.vendor.model.Vendor;
 import co.unicauca.digital.repository.back.domain.vendor.repository.IVendorRepository;
 import co.unicauca.digital.repository.back.global.exception.BusinessRuleException;
@@ -35,15 +37,19 @@ public class ContractServiceImpl implements IContractService {
     /** Object to perform CRUD operations on the Product entity */
     private final IVendorRepository vendorRepository;
 
+    /** Object to perform CRUD operations on the ModalityContractTypeRepository entity */
+    private final IModalityContractTypeRepository modalityContractTypeRepository;
+
     /** Mapping object for mapping the products */
     private final IContractMapper contractMapper;
 
     /**
      * constructor method
      */
-    public ContractServiceImpl(IContractRepository contractRepository, IVendorRepository vendorRepository, IContractMapper contractMapper) {
+    public ContractServiceImpl(IContractRepository contractRepository, IVendorRepository vendorRepository, IModalityContractTypeRepository modalityContractTypeRepository, IContractMapper contractMapper) {
         this.contractRepository = contractRepository;
         this.vendorRepository = vendorRepository;
+        this.modalityContractTypeRepository = modalityContractTypeRepository;
         this.contractMapper = contractMapper;
     }
 
@@ -51,10 +57,13 @@ public class ContractServiceImpl implements IContractService {
      * @see IContractService#getById(int)
      */
     @Override
-    public Response<ContractDtoFindResponse> getById(int id) {
+    public Response<ContractDtoFindResponse> getById(final int id) {
         Optional<Contract> contractFound = this.contractRepository.findById(id);
         if (contractFound.isEmpty()) throw new BusinessRuleException("contract.request.not.found");
         ContractDtoFindResponse contractDtoFindResponse = contractMapper.toDtoFind(contractFound.get());
+
+        //Set Vendor
+        contractDtoFindResponse.setVendor(contractFound.get().getVendor().getIdentification());
 
 
         return new ResponseHandler<>(200, "Encontrado", "Encontrado", contractDtoFindResponse).getResponse();
@@ -64,7 +73,7 @@ public class ContractServiceImpl implements IContractService {
      * @see IContractService#getAll(int,int)
      */
     @Override
-    public Response<PageableResponse<Object>> getAll(int pageNo, int pageSize) {
+    public Response<PageableResponse<Object>> getAll(final int pageNo, final int pageSize) {
         PageRequest pageRequest = PageRequest.of(pageNo, pageSize);
         Page<Contract> responsePage = contractRepository.findAll(pageRequest);
 
@@ -88,16 +97,21 @@ public class ContractServiceImpl implements IContractService {
      * @see IContractService#createContract(ContractDtoCreateRequest)
      */
     @Override
-    public Response<ContractDtoCreateResponse> createContract(ContractDtoCreateRequest contractDtoCreateRequest) {
-        if(entityExistsByIdentification(contractDtoCreateRequest.getReference())) throw new BusinessRuleException("contract.request.already.exists");
+    public Response<ContractDtoCreateResponse> createContract(final ContractDtoCreateRequest contractDtoCreateRequest) {
+        if(entityExistsByReference(contractDtoCreateRequest.getReference())) throw new BusinessRuleException("contract.request.already.exists");
 
         Contract contractModel = contractMapper.toEntityCreate(contractDtoCreateRequest);
         contractModel.setCreateTime(LocalDateTime.now());
 
         // Set Vendor
         Optional<Vendor> vendor = vendorRepository.findById(contractDtoCreateRequest.getVendor());
-        if (vendor.isEmpty()) throw new BusinessRuleException("contractualDocumentTypeRequest.vendor.field.error");
+        if (vendor.isEmpty()) throw new BusinessRuleException("contract.vendor.association.error");
         contractModel.setVendor(vendor.get());
+
+        // Set ModalityContractType
+        Optional<ModalityContractType> modalityContractType = modalityContractTypeRepository.findById(contractDtoCreateRequest.getModalityContractType());
+        if (modalityContractType.isEmpty()) throw new BusinessRuleException("contract.modalityContractType.association.error");
+        contractModel.setModalityContractType(modalityContractType.get());
 
         // TODO Set create user
         Contract contractSaved = this.contractRepository.save(contractModel);
@@ -110,7 +124,7 @@ public class ContractServiceImpl implements IContractService {
      * @see IContractService#updateContract(ContractDtoUpdateRequest)
      */
     @Override
-    public Response<ContractDtoCreateResponse> updateContract(ContractDtoUpdateRequest contractDtoUpdateRequest) {
+    public Response<ContractDtoCreateResponse> updateContract(final ContractDtoUpdateRequest contractDtoUpdateRequest) {
         Optional<Contract> contract = contractRepository.findById(contractDtoUpdateRequest.getId());
 
         if (contract.isEmpty()) throw new BusinessRuleException("contract.request.not.found");
@@ -139,7 +153,7 @@ public class ContractServiceImpl implements IContractService {
      * @see IContractService#deleteContract(int)
      */
     @Override
-    public Response<Boolean> deleteContract(int id) {
+    public Response<Boolean> deleteContract(final int id) {
         Optional<Contract> contract = contractRepository.findById(id);
 
         if (contract.isEmpty()) throw new BusinessRuleException("contract.request.not.found");
@@ -154,7 +168,7 @@ public class ContractServiceImpl implements IContractService {
      * @param reference the request to be validated
      * @return true if the entity exists
      */
-    private boolean entityExistsByIdentification(final String reference) {
+    private boolean entityExistsByReference(final String reference) {
         return contractRepository.findByReference(reference).isPresent();
     }
 }

@@ -36,12 +36,12 @@ public class ContractDtoCreateRequest {
     private String subject;
 
     /** Contract Vendor */
-    @NotNull(message = "{contractualDocumentTypeRequest.vendor.field.mull}")
+    @NotNull(message = "{contractualDocumentTypeRequest.vendor.field.null}")
     @Min(value = 1, message = "{contractualDocumentTypeRequest.vendor.field.error}")
     private int vendor;
 
     /** Contract ModalityContractType */
-    @NotNull(message = "{contractualDocumentTypeRequest.vendor.field.mull}")
-    @Min(value = 1, message = "{contractualDocumentTypeRequest.vendor.field.error}")
+    @NotNull(message = "{modalityContractType.field.null}")
+    @Min(value = 1, message = "{modalityContractType.field.empty}")
     private int modalityContractType;
 }
