@@ -1,9 +1,11 @@
 package co.unicauca.digital.repository.back.domain.vendor.model;
 
+import co.unicauca.digital.repository.back.domain.contract.model.Contract;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Class that defines an entity for the O/R mapping of the CONTRACT table.
@@ -39,5 +41,7 @@ public class Vendor {
     /** Vendor last update time */
     private LocalDateTime updateTime;
 
+    @OneToMany(mappedBy = "vendor")
+    private List<Contract> contracts;
 }
 

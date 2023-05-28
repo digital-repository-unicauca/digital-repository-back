@@ -1,9 +1,13 @@
 package co.unicauca.digital.repository.back.domain.contract.model;
 
+import co.unicauca.digital.repository.back.domain.collection.model.Collection;
+import co.unicauca.digital.repository.back.domain.modalityContractType.model.ModalityContractType;
+import co.unicauca.digital.repository.back.domain.vendor.model.Vendor;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Class that defines an entity for the O/R mapping of the CONTRACT table.
@@ -51,5 +55,18 @@ public class Contract {
     /** Contract last update time */
     private LocalDateTime updateTime;
 
+    /** Contract Vendor */
+    @ManyToOne(optional = false)
+    @JoinColumn(name="vendorId")
+    private Vendor vendor;
+
+    /** Contract Collections */
+    @OneToMany(mappedBy = "contract")
+    private List<Collection> collections;
+
+    /** Contract ModalityContractType */
+    @ManyToOne(optional = false)
+    @JoinColumn(name="modalityContractTypeId")
+    private ModalityContractType modalityContractType;
 }
 

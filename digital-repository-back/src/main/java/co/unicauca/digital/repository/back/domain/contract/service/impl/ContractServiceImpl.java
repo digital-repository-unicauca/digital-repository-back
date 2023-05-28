@@ -8,6 +8,8 @@ import co.unicauca.digital.repository.back.domain.contract.mapper.IContractMappe
 import co.unicauca.digital.repository.back.domain.contract.model.Contract;
 import co.unicauca.digital.repository.back.domain.contract.repository.IContractRepository;
 import co.unicauca.digital.repository.back.domain.contract.service.IContractService;
+import co.unicauca.digital.repository.back.domain.vendor.model.Vendor;
+import co.unicauca.digital.repository.back.domain.vendor.repository.IVendorRepository;
 import co.unicauca.digital.repository.back.global.exception.BusinessRuleException;
 import co.unicauca.digital.repository.back.global.response.PageableResponse;
 import co.unicauca.digital.repository.back.global.response.Response;
@@ -30,14 +32,18 @@ public class ContractServiceImpl implements IContractService {
     /** Object to perform CRUD operations on the Product entity */
     private final IContractRepository contractRepository;
 
+    /** Object to perform CRUD operations on the Product entity */
+    private final IVendorRepository vendorRepository;
+
     /** Mapping object for mapping the products */
     private final IContractMapper contractMapper;
 
     /**
      * constructor method
      */
-    public ContractServiceImpl(IContractRepository contractRepository, IContractMapper contractMapper) {
+    public ContractServiceImpl(IContractRepository contractRepository, IVendorRepository vendorRepository, IContractMapper contractMapper) {
         this.contractRepository = contractRepository;
+        this.vendorRepository = vendorRepository;
         this.contractMapper = contractMapper;
     }
 
@@ -87,6 +93,12 @@ public class ContractServiceImpl implements IContractService {
 
         Contract contractModel = contractMapper.toEntityCreate(contractDtoCreateRequest);
         contractModel.setCreateTime(LocalDateTime.now());
+
+        // Set Vendor
+        Optional<Vendor> vendor = vendorRepository.findById(contractDtoCreateRequest.getVendor());
+        if (vendor.isEmpty()) throw new BusinessRuleException("contractualDocumentTypeRequest.vendor.field.error");
+        contractModel.setVendor(vendor.get());
+
         // TODO Set create user
         Contract contractSaved = this.contractRepository.save(contractModel);
         ContractDtoCreateResponse contractDtoCreateResponse = contractMapper.toDtoCreate(contractSaved);

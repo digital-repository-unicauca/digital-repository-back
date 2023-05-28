@@ -1,9 +1,11 @@
 package co.unicauca.digital.repository.back.domain.modality.model;
 
+import co.unicauca.digital.repository.back.domain.modalityContractType.model.ModalityContractType;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 /**
@@ -42,4 +44,7 @@ public class Modality {
     /*Modality update user */
     @Column(length = 250)
     private String updateUser;
+
+    @OneToMany(mappedBy = "modality", fetch = FetchType.LAZY)
+    private List<ModalityContractType> modalityContractTypes;
 }

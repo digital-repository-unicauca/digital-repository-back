@@ -43,7 +43,9 @@ public interface IContractMapper {
             @Mapping(target = "initialDate", source = "initialDate"),
             @Mapping(target = "finalDate", source = "finalDate"),
             @Mapping(target = "status", source = "status"),
-            @Mapping(target = "subject", source = "subject")
+            @Mapping(target = "subject", source = "subject"),
+            @Mapping(target = "vendor", ignore = true),
+            @Mapping(target = "modalityContractType", ignore = true)
     })
     Contract toEntityCreate(final ContractDtoCreateRequest contractDtoCreateRequest);
 
@@ -51,7 +53,10 @@ public interface IContractMapper {
     @Mappings({
             @Mapping(target = "id", source = "id"),
             @Mapping(target = "reference", source = "reference"),
-            @Mapping(target = "signingDate", source = "signingDate")
+            @Mapping(target = "modality", ignore = true),
+            @Mapping(target = "contractType", ignore = true),
+            @Mapping(target = "vendor", ignore = true),
+            @Mapping(target = "signingYear", ignore = true)
     })
     ContractDtoFindContractualFoldersResponse toDtoFindContractualFolders(final Contract contract);
 

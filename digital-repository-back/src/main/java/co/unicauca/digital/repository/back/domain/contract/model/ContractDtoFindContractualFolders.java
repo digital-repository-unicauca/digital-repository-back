@@ -1,18 +1,19 @@
-package co.unicauca.digital.repository.back.domain.contract.dto.response;
+package co.unicauca.digital.repository.back.domain.contract.model;
 
 import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.time.LocalDateTime;
 
 /**
  * Class that defines an entity for the O/R mapping for the output of information from the CONTRACT table.
  */
+@Entity
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
-public class ContractDtoFindContractualFoldersResponse {
+public class ContractDtoFindContractualFolders {
 
     /** Contract id */
+    @Id
     private Integer id;
 
     /** Contract code */

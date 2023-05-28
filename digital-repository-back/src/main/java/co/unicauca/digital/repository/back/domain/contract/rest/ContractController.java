@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/contract")
@@ -99,9 +100,25 @@ public class ContractController {
      * @return {@link Response} Response object for the service, which contains information about the outcome of the transaction.
      */
     @GetMapping("contractualFolders")
-    public ResponseEntity<Response<PageableResponse<Object>>> getContractualFoldersSortByUpdateDate(
+    public ResponseEntity<Response<PageableResponse<Object>>> getContractualFoldersSortBySigningDate(
             @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
             @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize){
-        return new ResponseEntity<>(this.listContractualFolders.getContractualFoldersSortByUpdateDate(pageNo, pageSize), HttpStatus.OK);
+        return new ResponseEntity<>(this.listContractualFolders.getContractualFoldersSortBySigningDate(pageNo, pageSize), HttpStatus.OK);
+    }
+
+    /**
+     * API to get all contracts sort by update time descending
+     *
+     * @param pageNo Pagination Page number
+     * @param pageSize Pagination Page size
+     * @return {@link Response} Response object for the service, which contains information about the outcome of the transaction.
+     */
+    @GetMapping("contractualFoldersFilterPattern")
+    public ResponseEntity<Response<List<Object>>> getContractualFoldersByFilter(
+            @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
+            @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize,
+            @RequestParam() String filter,
+            @RequestParam() String search){
+        return new ResponseEntity<>(this.listContractualFolders.getContractualFoldersByFilter(pageNo, pageSize, filter, search), HttpStatus.OK);
     }
 }

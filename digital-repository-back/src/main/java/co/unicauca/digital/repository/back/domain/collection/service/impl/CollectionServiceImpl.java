@@ -74,7 +74,6 @@ public class CollectionServiceImpl implements ICollectionService {
         }
         Collection collectionUpdate = Collection.builder()
                 .id(collection.get().getId())
-                .parentId(collectionDtoRequest.getParentId())
                 .isLocalRequerid(collection.get().isLocalRequerid())
                 .createUser(collection.get().getCreateUser())
                 .createTime(collection.get().getCreateTime())
