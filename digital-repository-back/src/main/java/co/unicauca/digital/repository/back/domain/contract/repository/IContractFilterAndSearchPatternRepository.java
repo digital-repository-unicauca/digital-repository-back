@@ -21,7 +21,7 @@ public interface IContractFilterAndSearchPatternRepository extends JpaRepository
             value =
                     "SELECT CON.id, CON.reference, MODA.name AS modality, CONTYPE.name AS contractType, VEN.identification AS vendor, YEAR(CON.signingDate) AS signingYear " +
                             "FROM contract CON, modality MODA, contracttype CONTYPE, modalitycontracttype CONTYPEMODA, vendor VEN " +
-                            "WHERE CONTYPEMODA.modalityId = MODA.id AND CONTYPEMODA.contractTypeId = CONTYPE.id AND VEN.id = CON.vendorId AND " +
+                            "WHERE CON.modalityContractTypeId = CONTYPEMODA.id and CON.vendorId = VEN.id and CONTYPEMODA.modalityId = MODA.id AND CONTYPEMODA.contractTypeId = CONTYPE.id AND  " +
                             "((:filter = 'REFERENCE' AND CON.reference LIKE CONCAT('%', :search, '%')) OR " +
                             "(:filter = 'MODALITY' AND MODA.name LIKE CONCAT('%', :search, '%')) OR " +
                             "(:filter = 'TYPE' AND CONTYPE.name LIKE CONCAT('%', :search, '%')) OR " +
