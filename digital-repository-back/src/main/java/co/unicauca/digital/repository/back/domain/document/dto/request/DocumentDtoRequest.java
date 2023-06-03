@@ -23,7 +23,7 @@ public class DocumentDtoRequest {
     @NotNull(message = "{reference.field.not.null}")
     private Integer ordering;
     @NotNull(message = "{reference.field.not.null}")
-    private Integer url;
+    private String url;
     @NotNull(message = "{reference.field.not.null}")
     private Integer consecutive;
     @NotNull(message = "{reference.field.not.null}")
