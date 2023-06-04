@@ -7,6 +7,10 @@ import co.unicauca.digital.repository.back.domain.contractualDocument.mapper.ICo
 import co.unicauca.digital.repository.back.domain.contractualDocument.model.ContractualDocument;
 import co.unicauca.digital.repository.back.domain.contractualDocument.repository.IContractualDocumentRepository;
 import co.unicauca.digital.repository.back.domain.contractualDocument.service.IContractualDocumentService;
+import co.unicauca.digital.repository.back.domain.contractualDocumentType.model.ContractualDocumentType;
+import co.unicauca.digital.repository.back.domain.contractualDocumentType.repository.IContractualDocumentTypeRepository;
+import co.unicauca.digital.repository.back.domain.modalityContractType.model.ModalityContractType;
+import co.unicauca.digital.repository.back.domain.modalityContractType.repository.IModalityContractTypeRepository;
 import co.unicauca.digital.repository.back.global.exception.BusinessRuleException;
 import co.unicauca.digital.repository.back.global.response.PageableResponse;
 import co.unicauca.digital.repository.back.global.response.Response;
@@ -28,18 +32,39 @@ public class ContractualDocumentServiceImpl implements IContractualDocumentServi
     /** Object to perform CRUD operations on the ContractualDocument entity */
     private final IContractualDocumentRepository contractualDocumentRepository;
 
+    /** Object to perform CRUD operations on the ContractualDocumentType entity */
+    private final IContractualDocumentTypeRepository contractualDocumentTypeRepository;
+
+    /** Object to perform CRUD operations on the ModalityContractType entity */
+    private final IModalityContractTypeRepository modalityContractTypeRepository;
+
     /** Mapping object for mapping the ContractualDocument */
     private final IContractualDocumentMapper contractualDocumentMapper;
 
 
-    public ContractualDocumentServiceImpl(IContractualDocumentRepository contractualDocumentRepository, IContractualDocumentMapper contractualDocumentMapper) {
+    public ContractualDocumentServiceImpl(IContractualDocumentRepository contractualDocumentRepository, IContractualDocumentTypeRepository contractualDocumentTypeRepository, IModalityContractTypeRepository modalityContractTypeRepository, IContractualDocumentMapper contractualDocumentMapper) {
         this.contractualDocumentRepository = contractualDocumentRepository;
+        this.contractualDocumentTypeRepository = contractualDocumentTypeRepository;
+        this.modalityContractTypeRepository = modalityContractTypeRepository;
         this.contractualDocumentMapper = contractualDocumentMapper;
     }
 
     @Override
     public Response<ContractualDocumentDtoCreateResponse> createContractualDocumentType(ContractualDocumentDtoCreateRequest contractualDocumentDtoCreateRequest) {
+
+        if(!this.contractualDocumentTypeRepository.existsById(contractualDocumentDtoCreateRequest.getContractualDocumentType()))
+            throw new BusinessRuleException("contractualDocumentTypeRequest.request.not.found");
+
+        ContractualDocumentType contractualDocumentType = this.contractualDocumentTypeRepository.getReferenceById(contractualDocumentDtoCreateRequest.getContractualDocumentType());
+
+        if(!this.modalityContractTypeRepository.existsById(contractualDocumentDtoCreateRequest.getModalityContractType()))
+            throw new BusinessRuleException("modalityContractType.request.not.found");
+
+        ModalityContractType modalityContractType = this.modalityContractTypeRepository.getReferenceById(contractualDocumentDtoCreateRequest.getModalityContractType());
+
         ContractualDocument contractualDocument = this.contractualDocumentMapper.toEntityCreate(contractualDocumentDtoCreateRequest);
+        contractualDocument.setContractualDocumentType(contractualDocumentType);
+        contractualDocument.setModalityContractType(modalityContractType);
         contractualDocument.setCreateTime(LocalDateTime.now());
 
         ContractualDocument contractualDocumentSaved = this.contractualDocumentRepository.save(contractualDocument);

@@ -1,9 +1,11 @@
 package co.unicauca.digital.repository.back.domain.contractualDocumentType.model;
 
+import co.unicauca.digital.repository.back.domain.contractualDocument.model.ContractualDocument;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Class that defines an entity for the O/R mapping of the CONTRACT table.
@@ -42,4 +44,8 @@ public class ContractualDocumentType {
     /** ContractualDocumentType updateUser */
     @Column(length = 250, name = "UpdateUser")
     private String updateUser;
+
+    /** ContractualDocumentType relation with ContractualDocument*/
+    @OneToMany(mappedBy = "contractualDocumentType")
+    private List<ContractualDocument> contractualDocuments;
 }
