@@ -1,9 +1,11 @@
 package co.unicauca.digital.repository.back.domain.collection.dto.request;
 
+import co.unicauca.digital.repository.back.domain.document.model.Document;
 import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Getter
 @Setter
@@ -13,20 +15,14 @@ import javax.validation.constraints.NotNull;
 public class CollectionDtoRequest {
 
     private Integer id;
-
-    @NotNull(message = "{reference.field.not.null}")
-    private Integer parentId;
-
     private boolean isLocalRequerid;
-
     @NotNull(message = "{reference.field.not.null}")
     @NotEmpty(message = "{reference.field.not.empty}")
     private String createUser;
 
-
-//    @NotNull(message = "{reference.field.not.null}")
-//    @NotEmpty(message = "{reference.field.not.empty}")
-//    private ArrayList<Document> documents;
+    @NotNull(message = "{reference.field.not.null}")
+    @NotEmpty(message = "{reference.field.not.empty}")
+    private List<Document> documents;
 //
 //    @NotNull(message = "{reference.field.not.null}")
 //    private ContractualDocument contractualDocument;
