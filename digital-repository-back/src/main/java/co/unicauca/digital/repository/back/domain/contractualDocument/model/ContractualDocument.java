@@ -19,7 +19,7 @@ public class ContractualDocument {
     private Integer id;
 
     /** ContractualDocument description */
-    @Column(name = "Description")
+    @Column(length = 700, name = "Description")
     private String description;
 
     /** ContractualDocument isRequired */
