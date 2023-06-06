@@ -2,6 +2,9 @@ package co.unicauca.digital.repository.back.domain.document.model;
 import lombok.*;
 
 import javax.persistence.*;
+
+import co.unicauca.digital.repository.back.domain.collection.model.Collection;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -56,10 +59,10 @@ public class Document {
     /** Document update time */
     private LocalDateTime updateTime;
 
-
-//    @ManyToOne
-//    @JoinColumn(name = "collectionId")
-//    private Collection collection;
+    /** Document collection */
+    @OneToOne(mappedBy = "document")
+    @JoinColumn(name = "collectionId")
+    private Collection collection;
 
 
 }
