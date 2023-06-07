@@ -1,11 +1,14 @@
 package co.unicauca.digital.repository.back.domain.modalityContractType.service;
 
+import co.unicauca.digital.repository.back.domain.contractualDocument.dto.response.ContractualDocumentDtoFindResponse;
 import co.unicauca.digital.repository.back.domain.modalityContractType.dto.request.ModalityContractTypeDtoCreateRequest;
 import co.unicauca.digital.repository.back.domain.modalityContractType.dto.request.ModalityContractTypeDtoUpdateRequest;
 import co.unicauca.digital.repository.back.domain.modalityContractType.dto.response.ModalityContractTypeDtoCreateResponse;
 import co.unicauca.digital.repository.back.domain.modalityContractType.dto.response.ModalityContractTypeDtoFindResponse;
 import co.unicauca.digital.repository.back.global.response.PageableResponse;
 import co.unicauca.digital.repository.back.global.response.Response;
+
+import java.util.List;
 
 
 /**
@@ -53,5 +56,14 @@ public interface IModalityContractTypeService {
      * @return {@link Response} Response object for the service, which contains information about the outcome of the transaction.
      */
     Response<Boolean> deleteModalityContractType(final Integer id);
+
+    /**
+     * Service to find All a ContractualDocument by id
+     *
+     * @param id {@link Integer} ID Object with the information to be deleted
+     * @return {@link Response} Response object for the service, which contains information about the outcome of the transaction.
+     */
+    Response<List<ContractualDocumentDtoFindResponse>> getCheckListById(final Integer id);
+
 
 }

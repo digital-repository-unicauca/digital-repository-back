@@ -1,5 +1,6 @@
 package co.unicauca.digital.repository.back.domain.modalityContractType.rest;
 
+import co.unicauca.digital.repository.back.domain.contractualDocument.dto.response.ContractualDocumentDtoFindResponse;
 import co.unicauca.digital.repository.back.domain.modalityContractType.dto.request.ModalityContractTypeDtoCreateRequest;
 import co.unicauca.digital.repository.back.domain.modalityContractType.dto.request.ModalityContractTypeDtoUpdateRequest;
 import co.unicauca.digital.repository.back.domain.modalityContractType.dto.response.ModalityContractTypeDtoCreateResponse;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/modalityContractType")
@@ -82,6 +84,18 @@ public class ModalityContractTypeController {
     @DeleteMapping("{id}")
     public ResponseEntity<Response<Boolean>> deleteModalityContractType(@Valid @PathVariable final Integer id){
         return new ResponseEntity<>(this.modalityContractTypeService.deleteModalityContractType(id), HttpStatus.OK);
+    }
+
+    /**
+     * API to find a CheckList by id
+     *
+     * @param id {@link Integer} Object ID
+     * @return {@link Response} Response object for the service, which contains information about the outcome of the transaction.
+     */
+
+    @GetMapping("check-list/{id}")
+    public ResponseEntity<Response<List<ContractualDocumentDtoFindResponse>>> getCheckList(@Valid @PathVariable final Integer id){
+        return new ResponseEntity<>(this.modalityContractTypeService.getCheckListById(id), HttpStatus.OK);
     }
 
 }

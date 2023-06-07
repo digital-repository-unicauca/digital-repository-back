@@ -1,5 +1,7 @@
 package co.unicauca.digital.repository.back.domain.modalityContractType.service.impl;
 
+import co.unicauca.digital.repository.back.domain.contractualDocument.dto.response.ContractualDocumentDtoFindResponse;
+import co.unicauca.digital.repository.back.domain.contractualDocument.mapper.IContractualDocumentMapper;
 import co.unicauca.digital.repository.back.domain.modalityContractType.dto.request.ModalityContractTypeDtoCreateRequest;
 import co.unicauca.digital.repository.back.domain.modalityContractType.dto.request.ModalityContractTypeDtoUpdateRequest;
 import co.unicauca.digital.repository.back.domain.modalityContractType.dto.response.ModalityContractTypeDtoCreateResponse;
@@ -32,12 +34,16 @@ public class ModalityContractTypeServiceImpl implements IModalityContractTypeSer
     /** Mapping object for mapping the products */
     private final IModalityContractTypeMapper modalityContractTypeMapper;
 
+    /** Mapping object for mapping the products */
+    private final IContractualDocumentMapper contractualDocumentMapper;
+
     /**
      * constructor method
      */
-    public ModalityContractTypeServiceImpl(IModalityContractTypeRepository modalityContractTypeRepository, IModalityContractTypeMapper modalityContractTypeMapper) {
+    public ModalityContractTypeServiceImpl(IModalityContractTypeRepository modalityContractTypeRepository, IModalityContractTypeMapper modalityContractTypeMapper, IContractualDocumentMapper contractualDocumentMapper) {
         this.modalityContractTypeRepository = modalityContractTypeRepository;
         this.modalityContractTypeMapper = modalityContractTypeMapper;
+        this.contractualDocumentMapper = contractualDocumentMapper;
     }
 
     /**
@@ -136,6 +142,24 @@ public class ModalityContractTypeServiceImpl implements IModalityContractTypeSer
         modalityContractTypeRepository.deleteById(id);
 
         return new ResponseHandler<>(200, "Tipo de modalidad por contrato eliminado exitosamente", "Tipo de modalidad por contrato eliminado exitosamente", true).getResponse();
+    }
+
+    @Override
+    public Response<List<ContractualDocumentDtoFindResponse>> getCheckListById(Integer id) {
+
+        Optional<ModalityContractType> modalityContractType = this.modalityContractTypeRepository.findById(id);
+
+        if(modalityContractType.isEmpty()) throw new BusinessRuleException("modalityContractType.request.not.found");
+
+        if(modalityContractType.get().getContractualDocuments().isEmpty()){
+            throw new BusinessRuleException("modalityContractType.contractualDocuments.not.found");
+        }
+
+        List<ContractualDocumentDtoFindResponse> contractualDocumentDtoFindResponses = modalityContractType.get().getContractualDocuments().stream()
+                .map(this.contractualDocumentMapper::toDtoFind)
+                .collect(Collectors.toList());
+
+        return new ResponseHandler<>(200, "CheckList recuperada exitosamente", "CheckList recuperada exitosamente",contractualDocumentDtoFindResponses).getResponse();
     }
 
 
