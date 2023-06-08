@@ -2,7 +2,6 @@ package co.unicauca.digital.repository.back.domain.collection.model;
 
 import co.unicauca.digital.repository.back.domain.contract.model.Contract;
 import co.unicauca.digital.repository.back.domain.document.model.Document;
-import co.unicauca.digital.repository.back.domain.vendor.model.Vendor;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
@@ -22,15 +21,6 @@ public class Collection {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
-    private Collection parent;
-
-    @Singular
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "parent")
-    @JsonBackReference
-    private List<Collection> sons;
 
     private boolean isLocalRequerid;
 

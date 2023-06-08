@@ -1,5 +1,6 @@
 package co.unicauca.digital.repository.back.domain.document.model;
 import co.unicauca.digital.repository.back.domain.collection.model.Collection;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -59,6 +60,7 @@ public class Document {
     private LocalDateTime updateTime;
 
     @ManyToOne
+    @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "collectionId")
     private Collection collection;
 

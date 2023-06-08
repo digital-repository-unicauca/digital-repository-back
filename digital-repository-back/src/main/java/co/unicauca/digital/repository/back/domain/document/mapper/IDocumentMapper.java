@@ -7,6 +7,7 @@ import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 
 
+import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
 import java.util.List;
@@ -15,13 +16,13 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface IDocumentMapper {
     @Mappings({
+            @Mapping(source = "collection.id",target = "collectionId")
     })
     DocumentDtoResponse toDto(final Document document);
     List<DocumentDtoResponse> toDocumentList(List<Document> documentList);
 
     @InheritInverseConfiguration
-    //@Mapping(target = "collection", ignore = true)
+    @Mapping(source ="collectionId", target = "collection.id")
     Document toEntity(final DocumentDtoRequest requestDto);
-
 
 }

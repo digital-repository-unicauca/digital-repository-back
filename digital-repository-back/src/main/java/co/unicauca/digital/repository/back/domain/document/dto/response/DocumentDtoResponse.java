@@ -23,4 +23,5 @@ public class DocumentDtoResponse {
     private LocalDateTime createTime;
     private String updateUser;
     private LocalDateTime updateTime;
+    private Integer collectionId;
 }

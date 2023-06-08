@@ -5,6 +5,8 @@ import co.unicauca.digital.repository.back.domain.document.dto.response.Document
 import co.unicauca.digital.repository.back.global.response.PageableResponse;
 import co.unicauca.digital.repository.back.global.response.Response;
 
+import java.util.List;
+
 /**
  * Interface that allows defining the business operations to be carried out on the Document entity.
  */
@@ -16,6 +18,15 @@ public interface IDocumentService {
      * @return Response object for the service, containing information about the transaction outcome.
      */
     Response<DocumentDtoResponse> createDocument(final DocumentDtoRequest documentDtoRequest);
+
+
+    /**
+     * Creates documents based on the provided list of document DTO requests.
+     *
+     * @param documentDtoRequest The list of document DTO requests.
+     * @return A response containing a list of document DTO responses.
+     */
+    Response<List<DocumentDtoResponse>> createDocuments(final List<DocumentDtoRequest> documentDtoRequest);
 
     /**
      * Service to get a document by ID.
