@@ -2,8 +2,6 @@ package co.unicauca.digital.repository.back.domain.collection.model;
 
 import co.unicauca.digital.repository.back.domain.contract.model.Contract;
 import co.unicauca.digital.repository.back.domain.document.model.Document;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
