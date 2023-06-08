@@ -60,7 +60,7 @@ public class Document {
     private LocalDateTime updateTime;
 
     /** Document collection */
-    @OneToOne(mappedBy = "document")
+    @OneToOne(optional = false)
     @JoinColumn(name = "collectionId")
     private Collection collection;
 

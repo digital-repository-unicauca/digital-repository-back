@@ -3,7 +3,7 @@ package co.unicauca.digital.repository.back.domain.collection.model;
 import co.unicauca.digital.repository.back.domain.contract.model.Contract;
 import co.unicauca.digital.repository.back.domain.contractualDocument.model.ContractualDocument;
 import co.unicauca.digital.repository.back.domain.document.model.Document;
-import co.unicauca.digital.repository.back.domain.vendor.model.Vendor;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
@@ -46,7 +46,7 @@ public class Collection {
     private LocalDateTime updateTime;
 
     /** Contract Vendor */
-    @ManyToOne(optional = false)
+    @OneToOne(optional = false)
     @JoinColumn(name="contractId")
     private Contract contract;
 
@@ -54,7 +54,11 @@ public class Collection {
     private List<Document> documents;
 
     //TODO: Verificar mapeo
-    @OneToMany(mappedBy = "collection",cascade = CascadeType.ALL)
+//    @OneToMany(mappedBy = "collections",cascade = CascadeType.ALL)
+//    private ContractualDocument contractualDocument;
+
+    @OneToOne(optional = false)
+    @JoinColumn(name = "contractualDocumentId")
     private ContractualDocument contractualDocument;
 
 }
