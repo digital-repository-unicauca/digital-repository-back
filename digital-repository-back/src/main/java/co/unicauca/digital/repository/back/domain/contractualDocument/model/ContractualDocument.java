@@ -27,7 +27,11 @@ public class ContractualDocument {
 
     /** ContractualDocument subdirectory */
     @Column(name = "Subdirectory")
-    private String subdirectory;
+    private Integer subdirectory;
+
+    /** ContractualDocument subtype */
+    @Column(name = "subtype")
+    private Integer subtype;
 
     /** ContractualDocument ordering */
     @Column(name = "Ordering")

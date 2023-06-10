@@ -1,9 +1,11 @@
 package co.unicauca.digital.repository.back.domain.internalNormative.model;
 
+import co.unicauca.digital.repository.back.domain.modalityContractType.model.ModalityContractType;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Class that defines an entity for the O/R mapping of the INTERNAL NORMATIVE table.
@@ -45,4 +47,7 @@ public class InternalNormative {
 
     /** InternalNormative last update time */
     private LocalDateTime updateTime;
+
+    @OneToMany(mappedBy = "internalNormative", cascade = CascadeType.ALL)
+    private List<ModalityContractType> modalityContractType;
 }

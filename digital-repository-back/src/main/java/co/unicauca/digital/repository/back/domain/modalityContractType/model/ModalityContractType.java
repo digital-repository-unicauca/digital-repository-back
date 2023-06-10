@@ -2,7 +2,9 @@ package co.unicauca.digital.repository.back.domain.modalityContractType.model;
 
 import co.unicauca.digital.repository.back.domain.contractType.model.ContractType;
 import co.unicauca.digital.repository.back.domain.contractualDocument.model.ContractualDocument;
+import co.unicauca.digital.repository.back.domain.internalNormative.model.InternalNormative;
 import co.unicauca.digital.repository.back.domain.modality.model.Modality;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -32,6 +34,18 @@ public class ModalityContractType {
     @JoinColumn(name = "contractTypeId")
     private ContractType contractType;
 
+    @ManyToOne
+    @JsonIdentityReference(alwaysAsId = true)
+    @JoinColumn(name = "internalNormativeId")
+    private InternalNormative internalNormative;
+
+    @Column(length = 250)
+    private String externalCode;
+
+    private Integer version;
+
+    private Boolean isDisabled;
+
     /* ModalityContractType InternalNormativeId
     // private InternalNormative internalNormativeId;
     */
@@ -54,5 +68,7 @@ public class ModalityContractType {
 
     @OneToMany(mappedBy = "modalityContractType")
     private List<ContractualDocument> contractualDocuments;
+
+
 
 }
