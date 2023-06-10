@@ -1,8 +1,10 @@
 package co.unicauca.digital.repository.back.domain.collection.dto.response;
 
+import co.unicauca.digital.repository.back.domain.document.dto.request.DocumentDtoRequest;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,11 +19,8 @@ public class CollectionDtoResponse {
     private LocalDateTime createTime;
     private String updateUser;
     private LocalDateTime updateTime;
-
-
+    private List<DocumentDtoRequest> documents;
     /*
-    private ArrayList<Document> documents;
-
     private ContractualDocument contractualDocument;
 
     private Contract contract;

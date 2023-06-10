@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/document")
@@ -23,9 +24,15 @@ public class DocumentController {
     }
 
     @PostMapping
-    public ResponseEntity<Response<DocumentDtoResponse>> createDocument(@Valid @RequestBody final DocumentDtoRequest documentDtoRequest){
+    public ResponseEntity<Response<DocumentDtoResponse>> createDocument(@Valid @RequestBody final DocumentDtoRequest documentDtoRequest) {
         return new ResponseEntity<>(this.documentService.createDocument(documentDtoRequest), HttpStatus.OK);
     }
+
+    @PostMapping("/all")
+    public ResponseEntity<Response<List<DocumentDtoResponse>>> saveDocuments(@Valid @RequestBody List<DocumentDtoRequest> documents) {
+        return new ResponseEntity<>(this.documentService.createDocuments(documents), HttpStatus.OK);
+    }
+
 
     @GetMapping("/{documentId}")
     public ResponseEntity<Response<DocumentDtoResponse>> getByIdDocument(@PathVariable("documentId") int id){

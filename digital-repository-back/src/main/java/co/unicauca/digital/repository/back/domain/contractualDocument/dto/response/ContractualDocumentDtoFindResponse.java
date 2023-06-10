@@ -32,4 +32,10 @@ public class ContractualDocumentDtoFindResponse {
 
     /** ContractualDocument createUser */
     private String createUser;
+
+    /** ContractualDocumentType ContractualDocumentType */
+    private Integer contractualDocumentType;
+
+    /** ContractualDocument ModalityContractType */
+    private Integer modalityContractType;
 }

@@ -1,4 +1,6 @@
 package co.unicauca.digital.repository.back.domain.document.model;
+import co.unicauca.digital.repository.back.domain.collection.model.Collection;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,7 +29,8 @@ public class Document {
     private Integer ordering;
 
     /** Document url */
-    private Integer url;
+    @Column(length = 250)
+    private String url;
 
     /** Document Consecutive */
     private Integer consecutive;
@@ -56,10 +59,10 @@ public class Document {
     /** Document update time */
     private LocalDateTime updateTime;
 
-
-//    @ManyToOne
-//    @JoinColumn(name = "collectionId")
-//    private Collection collection;
+    @ManyToOne
+    @JsonIdentityReference(alwaysAsId = true)
+    @JoinColumn(name = "collectionId")
+    private Collection collection;
 
 
 }

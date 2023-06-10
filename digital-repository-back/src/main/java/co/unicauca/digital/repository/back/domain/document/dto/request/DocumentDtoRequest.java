@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class DocumentDtoRequest {
-    @NotNull(message = "{reference.field.not.null}")
     private Integer id;
     @NotNull(message = "{reference.field.not.null}")
     @NotEmpty(message = "{reference.field.not.empty}")
@@ -23,7 +22,7 @@ public class DocumentDtoRequest {
     @NotNull(message = "{reference.field.not.null}")
     private Integer ordering;
     @NotNull(message = "{reference.field.not.null}")
-    private Integer url;
+    private String url;
     @NotNull(message = "{reference.field.not.null}")
     private Integer consecutive;
     @NotNull(message = "{reference.field.not.null}")
@@ -44,4 +43,6 @@ public class DocumentDtoRequest {
     @NotNull(message = "{reference.field.not.null}")
     private LocalDateTime updateTime;
 
+    @NotNull(message = "{reference.field.not.null}")
+    private Integer collectionId;
 }

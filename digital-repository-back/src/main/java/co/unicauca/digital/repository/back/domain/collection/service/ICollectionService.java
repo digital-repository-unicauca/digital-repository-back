@@ -49,4 +49,5 @@ public interface ICollectionService {
      * @return Response object for the service, indicating whether the deletion was successful.
      */
     Response<Boolean> delete(Integer id);
+
 }

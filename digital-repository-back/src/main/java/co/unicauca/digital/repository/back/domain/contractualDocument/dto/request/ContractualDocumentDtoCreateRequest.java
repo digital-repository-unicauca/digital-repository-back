@@ -36,4 +36,13 @@ public class ContractualDocumentDtoCreateRequest {
     @NotNull(message = "{contractualDocumentRequest.createUser.field.null}")
     @NotEmpty(message = "{contractualDocumentRequest.createUser.field.empty}")
     private String createUser;
+
+    /** ContractualDocumentType ContractualDocumentType */
+    @NotNull(message = "{contractualDocumentRequest.contractualDocumentType.field.null}")
+    private Integer contractualDocumentType;
+
+    /** ContractualDocument ModalityContractType */
+    @NotNull(message = "{contractualDocumentRequest.modalityContractType.field.null}")
+    private Integer modalityContractType;
+
 }

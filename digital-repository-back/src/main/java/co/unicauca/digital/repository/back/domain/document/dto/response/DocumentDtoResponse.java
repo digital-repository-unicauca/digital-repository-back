@@ -14,7 +14,7 @@ public class DocumentDtoResponse {
     private String name;
     private String description;
     private Integer ordering;
-    private Integer url;
+    private String url;
     private Integer consecutive;
     private boolean isException;
     private String type;
@@ -23,4 +23,5 @@ public class DocumentDtoResponse {
     private LocalDateTime createTime;
     private String updateUser;
     private LocalDateTime updateTime;
+    private Integer collectionId;
 }
