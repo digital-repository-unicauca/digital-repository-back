@@ -34,7 +34,7 @@ public class ContractServiceImpl implements IContractService {
     /** Object to perform CRUD operations on the Product entity */
     private final IContractRepository contractRepository;
 
-    /** Object to perform CRUD operations on the Product entity */
+    /** Object to perform CRUD operations on the Vendor entity */
     private final IVendorRepository vendorRepository;
 
     /** Object to perform CRUD operations on the ModalityContractTypeRepository entity */
@@ -62,7 +62,7 @@ public class ContractServiceImpl implements IContractService {
         if (contractFound.isEmpty()) throw new BusinessRuleException("contract.request.not.found");
         ContractDtoFindResponse contractDtoFindResponse = contractMapper.toDtoFind(contractFound.get());
 
-        //Set Vendor
+        //Set Relationships
         contractDtoFindResponse.setVendor(contractFound.get().getVendor().getIdentification());
 
 

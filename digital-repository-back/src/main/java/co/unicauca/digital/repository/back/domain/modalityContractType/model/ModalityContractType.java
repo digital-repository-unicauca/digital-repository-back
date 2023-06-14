@@ -2,6 +2,7 @@ package co.unicauca.digital.repository.back.domain.modalityContractType.model;
 
 import co.unicauca.digital.repository.back.domain.contractType.model.ContractType;
 import co.unicauca.digital.repository.back.domain.modality.model.Modality;
+import co.unicauca.digital.repository.back.domain.internalNormative.model.InternalNormative;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,8 +20,6 @@ public class ModalityContractType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    // TODO add relationships
-
     @ManyToOne(optional = false)
     @JoinColumn(name = "modalityId")
     private Modality modality;
@@ -30,9 +29,9 @@ public class ModalityContractType {
     @JoinColumn(name = "contractTypeId")
     private ContractType contractType;
 
-    /* ModalityContractType InternalNormativeId
-    // private InternalNormative internalNormativeId;
-    */
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "contractTypeId")
+    private InternalNormative internalNormative;
 
     /** ModalityContractType create User */
     @Column(length = 250)

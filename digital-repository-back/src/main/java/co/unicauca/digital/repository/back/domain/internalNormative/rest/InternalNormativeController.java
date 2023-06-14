@@ -79,7 +79,7 @@ public class InternalNormativeController {
      * @param id {@link Integer} Object ID
      * @return {@link Response} Response object for the service, which contains information about the outcome of the transaction.
      */
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Response<Boolean>> deleteInternalNormative(@Valid @PathVariable final Integer id){
         return new ResponseEntity<>(this.internalNormativeService.deleteInternalNormative(id), HttpStatus.OK);
     }

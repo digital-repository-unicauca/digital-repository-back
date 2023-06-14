@@ -25,5 +25,4 @@ public class ModalityContractTypeDtoCreateRequest {
     @NotNull(message = "{ModalityContractType.internalNormativeId.field.not.null}")
     @NotEmpty(message = "{ModalityContractType.internalNormativeId.field.not.empty}")
     private Integer internalNormativeId;
-
 }
