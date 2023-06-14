@@ -3,6 +3,10 @@ package co.unicauca.digital.repository.back.domain.contractualDocument.model;
 import lombok.*;
 
 import javax.persistence.*;
+
+import co.unicauca.digital.repository.back.domain.contractualDocumentType.model.ContractualDocumentType;
+import co.unicauca.digital.repository.back.domain.modalityContractType.model.ModalityContractType;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -46,5 +50,16 @@ public class ContractualDocument {
     /** ContractualDocument updateUser */
     @Column(length = 250, name = "UpdateUser")
     private String updateUser;
+
+    /** ContractualDocument modalityContractType */
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "modalityContractTypeId")
+    private ModalityContractType modalityContractType;
+
+    /** ContractualDocument contractualDocumentType */
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "contractualDocumentTypeId")
+    private ContractualDocumentType contractualDocumentType;
+
 
 }
