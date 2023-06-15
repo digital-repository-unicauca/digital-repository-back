@@ -31,7 +31,8 @@ public interface IContractMapper {
             @Mapping(target = "reference", source = "reference"),
             @Mapping(target = "initialDate", source = "initialDate"),
             @Mapping(target = "finalDate", source = "finalDate"),
-            @Mapping(target = "vendor", ignore = true)
+            @Mapping(target = "vendor", ignore = true),
+            @Mapping(target = "createUser", source = "createUser")
     })
     ContractDtoFindResponse toDtoFind(final Contract contract);
 

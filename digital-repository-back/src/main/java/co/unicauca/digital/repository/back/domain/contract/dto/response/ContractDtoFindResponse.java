@@ -24,4 +24,7 @@ public class ContractDtoFindResponse {
 
     /** Contract vendor */
     private String vendor;
+
+    /** Contract subject */
+    private String subject;
 }
