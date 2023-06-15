@@ -24,4 +24,10 @@ public class ContractDtoFindResponse {
 
     /** Contract vendor */
     private String vendor;
+
+    /** Contract subject */
+    private String subject;
+
+    /** Contract modalityContractType */
+    private Integer modalityContractType;
 }

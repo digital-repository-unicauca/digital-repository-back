@@ -1,7 +1,13 @@
 package co.unicauca.digital.repository.back.domain.modalityContractType.service.impl;
 
+import co.unicauca.digital.repository.back.domain.contractType.model.ContractType;
+import co.unicauca.digital.repository.back.domain.contractType.repository.IContractTypeRepository;
 import co.unicauca.digital.repository.back.domain.contractualDocument.dto.response.ContractualDocumentDtoFindResponse;
 import co.unicauca.digital.repository.back.domain.contractualDocument.mapper.IContractualDocumentMapper;
+import co.unicauca.digital.repository.back.domain.internalNormative.model.InternalNormative;
+import co.unicauca.digital.repository.back.domain.internalNormative.repository.IInternalNormativeRepository;
+import co.unicauca.digital.repository.back.domain.modality.model.Modality;
+import co.unicauca.digital.repository.back.domain.modality.repository.IModalityRepository;
 import co.unicauca.digital.repository.back.domain.modalityContractType.dto.request.ModalityContractTypeDtoCreateRequest;
 import co.unicauca.digital.repository.back.domain.modalityContractType.dto.request.ModalityContractTypeDtoUpdateRequest;
 import co.unicauca.digital.repository.back.domain.modalityContractType.dto.response.ModalityContractTypeDtoCreateResponse;
@@ -37,13 +43,25 @@ public class ModalityContractTypeServiceImpl implements IModalityContractTypeSer
     /** Mapping object for mapping the products */
     private final IContractualDocumentMapper contractualDocumentMapper;
 
+    /** Object to perform CRUD operations on the Modality entity */
+    private final IModalityRepository modalityRepository;
+
+    /** Object to perform CRUD operations on the ContractType entity */
+    private final IContractTypeRepository contractTypeRepository;
+
+    /** Object to perform CRUD operations on the InternalNormative entity */
+    private final IInternalNormativeRepository internalNormativeRepository;
+
     /**
      * constructor method
      */
-    public ModalityContractTypeServiceImpl(IModalityContractTypeRepository modalityContractTypeRepository, IModalityContractTypeMapper modalityContractTypeMapper, IContractualDocumentMapper contractualDocumentMapper) {
+    public ModalityContractTypeServiceImpl(IModalityContractTypeRepository modalityContractTypeRepository, IModalityContractTypeMapper modalityContractTypeMapper, IContractualDocumentMapper contractualDocumentMapper, IModalityRepository modalityRepository, IContractTypeRepository contractTypeRepository, IInternalNormativeRepository internalNormativeRepository) {
         this.modalityContractTypeRepository = modalityContractTypeRepository;
         this.modalityContractTypeMapper = modalityContractTypeMapper;
         this.contractualDocumentMapper = contractualDocumentMapper;
+        this.modalityRepository = modalityRepository;
+        this.contractTypeRepository = contractTypeRepository;
+        this.internalNormativeRepository = internalNormativeRepository;
     }
 
     /**
@@ -55,8 +73,28 @@ public class ModalityContractTypeServiceImpl implements IModalityContractTypeSer
         ModalityContractType modalityContractTypeModel = modalityContractTypeMapper.toEntityCreate(modalityContractTypeDtoCreateRequest);
         modalityContractTypeModel.setCreateTime(LocalDateTime.now());
         // TODO Set create user and get id from relationships
+
+        //Set ContractType
+        Optional<ContractType> contractType = contractTypeRepository.findById(modalityContractTypeDtoCreateRequest.getContractTypeId());
+        if (contractType.isEmpty()) throw new BusinessRuleException("modalityContractType.contractType.association.error");
+        modalityContractTypeModel.setContractType(contractType.get());
+
+        //Set Modality
+        Optional<Modality> modality = modalityRepository.findById(modalityContractTypeDtoCreateRequest.getModalityId());
+        if (modality.isEmpty()) throw new BusinessRuleException("modalityContractType.modality.association.error");
+        modalityContractTypeModel.setModality(modality.get());
+
+        //Set InternalNormative
+        Optional<InternalNormative> internalNormative = internalNormativeRepository.findById(modalityContractTypeDtoCreateRequest.getInternalNormativeId());
+        if (internalNormative.isEmpty()) throw new BusinessRuleException("modalityContractType.internalNormative.association.error");
+        modalityContractTypeModel.setInternalNormative(internalNormative.get());
+
         ModalityContractType modalityContractTypeSaved = modalityContractTypeRepository.save(modalityContractTypeModel);
         ModalityContractTypeDtoCreateResponse modalityContractTypeDtoCreateResponse = modalityContractTypeMapper.toDtoCreate(modalityContractTypeSaved);
+
+        modalityContractTypeDtoCreateResponse.setModalityId(modalityContractTypeSaved.getModality().getId());
+        modalityContractTypeDtoCreateResponse.setInternalNormativeId(modalityContractTypeSaved.getInternalNormative().getId());
+        modalityContractTypeDtoCreateResponse.setContractTypeId(modalityContractTypeSaved.getContractType().getId());
 
         return new ResponseHandler<>(200, "Tipo de contrato por modalidad creado exitosamente", "Tipo de contrato por modalidad creado exitosamente", modalityContractTypeDtoCreateResponse).getResponse();
     }
@@ -71,11 +109,10 @@ public class ModalityContractTypeServiceImpl implements IModalityContractTypeSer
         if (modalityContractTypeFound.isEmpty()) throw new BusinessRuleException("modalityContractType.request.not.found");
         ModalityContractTypeDtoFindResponse modalityContractTypeDtoFindResponse = modalityContractTypeMapper.toDtoFind(modalityContractTypeFound.get());
 
-        /* TODO Get id from relationships
-        modalityContractTypeDtoFindResponse.setModalityId(modalityContractTypeFound.getModalityId().getId());
-        modalityContractTypeDtoFindResponse.setInternalNormativeId(modalityContractTypeFound.getInternalNormativeId().getId());
-        modalityContractTypeDtoFindResponse.setContractTypeId(modalityContractTypeFound.getContractType().getId());
-        */
+        // TODO Get id from relationships
+        modalityContractTypeDtoFindResponse.setModalityId(modalityContractTypeFound.get().getModality().getId());
+        modalityContractTypeDtoFindResponse.setInternalNormativeId(modalityContractTypeFound.get().getInternalNormative().getId());
+        modalityContractTypeDtoFindResponse.setContractTypeId(modalityContractTypeFound.get().getContractType().getId());
 
         return new ResponseHandler<>(200, "Tipo de contrato por modalidad encontrado", "Tipo de contrato por modalidad encontrado", modalityContractTypeDtoFindResponse).getResponse();
     }
@@ -122,11 +159,18 @@ public class ModalityContractTypeServiceImpl implements IModalityContractTypeSer
                 .createTime(modalityContractType.get().getCreateTime())
                 .updateTime(LocalDateTime.now())
                 // TODO .updateUser(XXX) and Set id from relationships
+                .modality(modalityContractType.get().getModality())
+                .contractType(modalityContractType.get().getContractType())
+                .internalNormative(modalityContractType.get().getInternalNormative())
                 .build();
 
         ModalityContractType modalityContractTypeSaved = modalityContractTypeRepository.save(updateModalityContractType);
         ModalityContractTypeDtoCreateResponse modalityContractTypeDtoCreateResponse = modalityContractTypeMapper.toDtoCreate(modalityContractTypeSaved);
         // TODO Get id from relationships
+        modalityContractTypeDtoCreateResponse.setModalityId(modalityContractTypeSaved.getModality().getId());
+        modalityContractTypeDtoCreateResponse.setInternalNormativeId(modalityContractTypeSaved.getInternalNormative().getId());
+        modalityContractTypeDtoCreateResponse.setContractTypeId(modalityContractTypeSaved.getContractType().getId());
+
         return new ResponseHandler<>(200, "Tipo de modalidad por contrato actualizado exitosamente", "Tipo de modalidad por contrato actualizado exitosamente", modalityContractTypeDtoCreateResponse).getResponse();
     }
 
