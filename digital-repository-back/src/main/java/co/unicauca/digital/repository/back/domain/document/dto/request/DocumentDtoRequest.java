@@ -35,14 +35,10 @@ public class DocumentDtoRequest {
     @NotNull(message = "{reference.field.not.null}")
     @NotEmpty(message = "{reference.field.not.empty}")
     private String createUser;
-    @NotNull(message = "{reference.field.not.null}")
-    private LocalDateTime createTime;
-    @NotNull(message = "{reference.field.not.null}")
-    @NotEmpty(message = "{reference.field.not.empty}")
-    private String updateUser;
-    @NotNull(message = "{reference.field.not.null}")
-    private LocalDateTime updateTime;
 
     @NotNull(message = "{reference.field.not.null}")
     private Integer collectionId;
+
+    @NotNull(message = "{reference.field.not.null}")
+    private Integer contractualDocumentId;
 }

@@ -32,6 +32,7 @@ public class CollectionServiceImpl implements ICollectionService {
     @Override
     public Response<CollectionDtoResponse> createCollection(CollectionDtoRequest collectionDtoRequest) {
         Collection collection = this.collectionMapper.toEntity(collectionDtoRequest);
+        collection.setCreateTime(LocalDateTime.now());
         Collection entitySave = this.collectionRepository.save(collection);
         CollectionDtoResponse collectionDtoResponse = this.collectionMapper.toDto(entitySave);
 

@@ -13,6 +13,8 @@ import javax.validation.constraints.NotNull;
 public class CollectionDtoRequest {
 
     private Integer id;
+    @NotNull(message = "{reference.field.not.null}")
+    private Integer contractId;
     private boolean isLocalRequerid;
     @NotNull(message = "{reference.field.not.null}")
     @NotEmpty(message = "{reference.field.not.empty}")

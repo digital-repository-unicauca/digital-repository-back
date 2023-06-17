@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -44,6 +45,7 @@ public class DocumentServiceImpl implements IDocumentService {
             throw new BusinessRuleException("document.request.collectionId.not.found");
         }
         Document document = this.documentMapper.toEntity(documentDtoRequest);
+        document.setCreateTime(LocalDateTime.now());
         Document entitySave = this.documentRepository.save(document);
         DocumentDtoResponse documentDtoResponse = this.documentMapper.toDto(entitySave);
         return new ResponseHandler<>(200,"Documento guardado con éxito", "",documentDtoResponse).getResponse();

@@ -1,11 +1,13 @@
 package co.unicauca.digital.repository.back.domain.contractualDocument.model;
 
 import co.unicauca.digital.repository.back.domain.contractualDocumentType.model.ContractualDocumentType;
+import co.unicauca.digital.repository.back.domain.document.model.Document;
 import co.unicauca.digital.repository.back.domain.modalityContractType.model.ModalityContractType;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "contractualDocument")
@@ -62,5 +64,8 @@ public class ContractualDocument {
     @ManyToOne()
     @JoinColumn(name = "modalityContractType")
     private ModalityContractType modalityContractType;
+
+    @OneToMany(mappedBy = "contractualDocument", cascade = CascadeType.ALL)
+    private List<Document> documents;
 
 }
