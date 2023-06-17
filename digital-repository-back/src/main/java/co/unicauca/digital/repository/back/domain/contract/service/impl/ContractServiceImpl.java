@@ -65,6 +65,8 @@ public class ContractServiceImpl implements IContractService {
         //Set Vendor
         contractDtoFindResponse.setVendor(contractFound.get().getVendor().getIdentification());
 
+        //Set ModalityContractType
+        contractDtoFindResponse.setModalityContractType(contractFound.get().getModalityContractType().getId());
 
         return new ResponseHandler<>(200, "Encontrado", "Encontrado", contractDtoFindResponse).getResponse();
     }

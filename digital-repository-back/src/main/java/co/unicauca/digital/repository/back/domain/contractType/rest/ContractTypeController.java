@@ -56,7 +56,7 @@ public class ContractTypeController {
     @GetMapping("")
     public ResponseEntity<Response<PageableResponse<Object>>> getAll(
         @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
-        @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize){
+        @RequestParam(value = "pageSize", defaultValue = "30", required = false) int pageSize){
             return new ResponseEntity<>(this.contractTypeService.getAll(pageNo, pageSize), HttpStatus.OK);
     }
 
