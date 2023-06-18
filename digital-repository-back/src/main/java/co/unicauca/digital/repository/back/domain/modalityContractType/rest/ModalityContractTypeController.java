@@ -71,8 +71,10 @@ public class ModalityContractTypeController {
      * @param modalityId {@link Integer} ID modality to do the search
      * @return {@link Response} Response object for the service, which contains information about the outcome of the transaction.
      */
-    @GetMapping("/{contractTypeId}-{modalityId}")
-    public ResponseEntity<Response<ModalityContractTypeDtoFindResponse>> getByContractModality(@Valid @PathVariable final Integer contractTypeId, @Valid @PathVariable final Integer modalityId) {
+    @GetMapping("")
+    public ResponseEntity<Response<ModalityContractTypeDtoFindResponse>> getByContractModality(
+            @RequestParam(value = "contractTypeId", required = true) Integer contractTypeId,
+            @RequestParam(value = "modalityId", required = true) Integer modalityId) {
         return new ResponseEntity<>(this.modalityContractTypeService.getByContractModality(contractTypeId, modalityId), HttpStatus.OK);
     }
 
