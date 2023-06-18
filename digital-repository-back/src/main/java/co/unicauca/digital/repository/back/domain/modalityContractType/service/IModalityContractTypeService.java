@@ -42,6 +42,15 @@ public interface IModalityContractTypeService {
     Response<PageableResponse<Object>> getAll(int pageNo, int pageSize);
 
     /**
+     * Service to get a Modality Contract Type for id
+     *
+     * @param contractTypeId {@link Integer} ID contractType to do the search
+     * @param modalityId {@link Integer} ID modality to do the search
+     * @return {@link Response} Response object for the service, which contains information about the outcome of the transaction.
+     */
+    Response<ModalityContractTypeDtoFindResponse> getByContractModality(final Integer contractTypeId, final Integer modalityId);
+
+    /**
      * Service to update a Modality Contract Type
      *
      * @param modalityContractTypeDtoUpdateRequest {@link ModalityContractTypeDtoUpdateRequest} Object with the information to be inserted, received in the body of the request to the service

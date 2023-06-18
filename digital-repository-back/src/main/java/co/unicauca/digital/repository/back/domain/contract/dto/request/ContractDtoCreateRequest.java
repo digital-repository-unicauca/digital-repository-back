@@ -18,7 +18,7 @@ public class ContractDtoCreateRequest {
     private String reference;
 
     /** Contract date of signature  */
-    private LocalDateTime signingDate;
+    //private LocalDateTime signingDate;
 
     /** Contract initial date */
     private LocalDateTime initialDate;

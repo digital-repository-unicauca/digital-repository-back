@@ -65,6 +65,18 @@ public class ModalityContractTypeController {
     }
 
     /**
+     * API to get a modality contract type by id
+     *
+     * @param contractTypeId {@link Integer} ID contractType to do the search
+     * @param modalityId {@link Integer} ID modality to do the search
+     * @return {@link Response} Response object for the service, which contains information about the outcome of the transaction.
+     */
+    @GetMapping("/{contractTypeId}{modalityId}")
+    public ResponseEntity<Response<ModalityContractTypeDtoFindResponse>> getByContractModality(@Valid @PathVariable final Integer contractTypeId, @Valid @PathVariable final Integer modalityId) {
+        return new ResponseEntity<>(this.modalityContractTypeService.getByContractModality(contractTypeId, modalityId), HttpStatus.OK);
+    }
+
+    /**
      * API to update a modality contract type
      *
      * @param modalityContractTypeDtoUpdateRequest {@link ModalityContractTypeDtoUpdateRequest} Object with the information to be updated, received in the body of the request to the service

@@ -104,6 +104,7 @@ public class ContractServiceImpl implements IContractService {
 
         Contract contractModel = contractMapper.toEntityCreate(contractDtoCreateRequest);
         contractModel.setCreateTime(LocalDateTime.now());
+        contractModel.setSigningDate(contractModel.getInitialDate());
 
         // Set Vendor
         Optional<Vendor> vendor = vendorRepository.findById(contractDtoCreateRequest.getVendor());
@@ -134,7 +135,7 @@ public class ContractServiceImpl implements IContractService {
         Contract updateContract = Contract.builder()
                 .id(contract.get().getId())
                 .reference(contractDtoUpdateRequest.getReference())
-                .signingDate(contractDtoUpdateRequest.getSigningDate())
+                .signingDate(contractDtoUpdateRequest.getInitialDate())
                 .initialDate(contractDtoUpdateRequest.getInitialDate())
                 .finalDate(contractDtoUpdateRequest.getFinalDate())
                 .status(contractDtoUpdateRequest.getStatus())

@@ -144,6 +144,32 @@ public class ModalityContractTypeServiceImpl implements IModalityContractTypeSer
     }
 
     /**
+     * @see IModalityContractTypeService#getByContractModality(Integer, Integer) (int, int)
+     */
+    @Override
+    public Response<ModalityContractTypeDtoFindResponse> getByContractModality(Integer contractTypeId, Integer modalityId) {
+
+        //ContractType
+        Optional<ContractType> contractType = contractTypeRepository.findById(contractTypeId);
+        if (contractType.isEmpty()) throw new BusinessRuleException("modalityContractType.contractType.association.error");
+
+        //Modality
+        Optional<Modality> modality = modalityRepository.findById(modalityId);
+        if (modality.isEmpty()) throw new BusinessRuleException("modalityContractType.modality.association.error");
+
+        Optional<ModalityContractType> modalityContractTypeFound = modalityContractTypeRepository.findByContractModality(contractTypeId, modalityId);
+
+        if (modalityContractTypeFound.isEmpty()) throw new BusinessRuleException("modalityContractType.request.not.found");
+        ModalityContractTypeDtoFindResponse modalityContractTypeDtoFindResponse = modalityContractTypeMapper.toDtoFind(modalityContractTypeFound.get());
+
+        modalityContractTypeDtoFindResponse.setModalityId(modalityId);
+        modalityContractTypeDtoFindResponse.setInternalNormativeId(modalityContractTypeFound.get().getInternalNormative().getId());
+        modalityContractTypeDtoFindResponse.setContractTypeId(contractTypeId);
+
+        return new ResponseHandler<>(200, "Tipo de contrato por modalidad encontrado", "Tipo de contrato por modalidad encontrado", modalityContractTypeDtoFindResponse).getResponse();
+    }
+
+    /**
      * @see IModalityContractTypeService#updateModalityContractType(ModalityContractTypeDtoUpdateRequest)
      */
     @Override

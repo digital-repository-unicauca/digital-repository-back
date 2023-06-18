@@ -16,7 +16,7 @@ import org.mapstruct.Mappings;
 public interface IContractMapper {
     @Mappings({
             @Mapping(target = "reference", source = "reference"),
-            @Mapping(target = "signingDate", source = "signingDate"),
+            //@Mapping(target = "signingDate", source = "signingDate"),
             @Mapping(target = "initialDate", source = "initialDate"),
             @Mapping(target = "finalDate", source = "finalDate"),
             @Mapping(target = "status", source = "status"),
@@ -40,7 +40,7 @@ public interface IContractMapper {
 
     @Mappings({
             @Mapping(target = "reference", source = "reference"),
-            @Mapping(target = "signingDate", source = "signingDate"),
+            //@Mapping(target = "signingDate", source = "signingDate"),
             @Mapping(target = "initialDate", source = "initialDate"),
             @Mapping(target = "finalDate", source = "finalDate"),
             @Mapping(target = "status", source = "status"),
