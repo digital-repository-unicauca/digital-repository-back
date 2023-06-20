@@ -13,7 +13,7 @@ import java.util.Optional;
 @Repository
 public interface IModalityContractTypeRepository extends JpaRepository<ModalityContractType, Integer> {
 
-    @Query(value = "SELECT * FROM modalitycontractype WHERE contractTypeId = ?1 and modalityId = ?2")
+    @Query(value = "FROM ModalityContractType WHERE contractTypeId = ?1 and modalityId = ?2")
     Optional<ModalityContractType> findByContractModality(Integer contractType, Integer modality);
 
 }

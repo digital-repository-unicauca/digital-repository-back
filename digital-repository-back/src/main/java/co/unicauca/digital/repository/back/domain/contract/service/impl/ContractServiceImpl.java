@@ -112,7 +112,7 @@ public class ContractServiceImpl implements IContractService {
         contractModel.setVendor(vendor.get());
 
         // Set ModalityContractType
-        Optional<ModalityContractType> modalityContractType = modalityContractTypeRepository.findById(contractDtoCreateRequest.getModalityContractType());
+        Optional<ModalityContractType> modalityContractType = modalityContractTypeRepository.findByContractModality(contractDtoCreateRequest.getContractTypeId(), contractDtoCreateRequest.getModalityId());
         if (modalityContractType.isEmpty()) throw new BusinessRuleException("contract.modalityContractType.association.error");
         contractModel.setModalityContractType(modalityContractType.get());
 
