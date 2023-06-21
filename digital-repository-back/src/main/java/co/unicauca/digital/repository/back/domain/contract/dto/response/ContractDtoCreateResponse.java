@@ -13,6 +13,9 @@ import java.time.LocalDateTime;
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
 public class ContractDtoCreateResponse {
 
+    /** contract ID */
+    private Integer id;
+
     /** Contract code */
     private String reference;
 

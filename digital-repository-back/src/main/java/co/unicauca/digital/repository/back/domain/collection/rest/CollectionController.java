@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/collection")
@@ -25,6 +26,11 @@ public class CollectionController {
     @PostMapping
     public ResponseEntity<Response<CollectionDtoResponse>> createCollection(@Valid @RequestBody final CollectionDtoRequest collectionDtoRequest){
         return new ResponseEntity<>(this.collectionService.createCollection(collectionDtoRequest), HttpStatus.OK);
+    }
+
+    @PostMapping("/all")
+    public ResponseEntity<Response<List<CollectionDtoResponse>>> saveDocuments(@RequestBody final List<CollectionDtoRequest> collectionDtoRequests){
+        return new ResponseEntity<>(this.collectionService.saveDocuments(collectionDtoRequests), HttpStatus.OK);
     }
 
     @GetMapping("/{collectionId}")

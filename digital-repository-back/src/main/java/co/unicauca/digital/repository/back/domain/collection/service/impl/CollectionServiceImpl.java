@@ -6,6 +6,10 @@ import co.unicauca.digital.repository.back.domain.collection.mapper.ICollectionM
 import co.unicauca.digital.repository.back.domain.collection.model.Collection;
 import co.unicauca.digital.repository.back.domain.collection.repository.ICollectionRepository;
 import co.unicauca.digital.repository.back.domain.collection.service.ICollectionService;
+import co.unicauca.digital.repository.back.domain.contract.model.Contract;
+import co.unicauca.digital.repository.back.domain.contractualDocument.model.ContractualDocument;
+import co.unicauca.digital.repository.back.domain.document.service.IDocumentService;
+import co.unicauca.digital.repository.back.domain.modalityContractType.repository.IModalityContractTypeRepository;
 import co.unicauca.digital.repository.back.global.exception.BusinessRuleException;
 import co.unicauca.digital.repository.back.global.response.PageableResponse;
 import co.unicauca.digital.repository.back.global.response.Response;
@@ -23,11 +27,16 @@ import java.util.stream.Collectors;
 @Service
 public class CollectionServiceImpl implements ICollectionService {
     private final ICollectionRepository collectionRepository;
+    private final IDocumentService documentService;
+    private final IModalityContractTypeRepository modalityRepository;
     private final ICollectionMapper collectionMapper;
 
-    public CollectionServiceImpl(ICollectionRepository collectionRepository, ICollectionMapper collectionMapper) {
+    public CollectionServiceImpl(ICollectionRepository collectionRepository, ICollectionMapper collectionMapper, IModalityContractTypeRepository modalityRepository
+            ,IDocumentService documentService) {
         this.collectionRepository = collectionRepository;
         this.collectionMapper = collectionMapper;
+        this.modalityRepository = modalityRepository;
+        this.documentService = documentService;
     }
 
     public Response<List<CollectionDtoResponse>> saveCollections(List<CollectionDtoRequest> collections ){
@@ -61,6 +70,7 @@ public class CollectionServiceImpl implements ICollectionService {
 
     @Override
     public Response<PageableResponse<Object>> getAll(int pageNumber, int pageSize) {
+
         PageRequest pageRequest = PageRequest.of(pageNumber,pageSize);
         Page<Collection> page = this.collectionRepository.findAll(pageRequest);
         List<Object> documentList = page.get().map(
@@ -104,10 +114,37 @@ public class CollectionServiceImpl implements ICollectionService {
         return new ResponseHandler<>(200,"Colección Eliminada", "", collectionExist(id)).getResponse();
     }
 
+    @Override
+    public Boolean createCollections( Contract contract) {
+        List<ContractualDocument> checkList = this.modalityRepository.findById(contract.getModalityContractType().getId()).get().getContractualDocuments();
+        for (ContractualDocument contractualDocument: checkList ) {
+            Collection collection = new Collection();
+            collection.setContract(contract);
+            collection.setContractualDocument(contractualDocument);
+            collection.setCreateUser(contract.getCreateUser());
+            this.collectionRepository.save(collection);
+        }
+        return true;
+    }
+
+    @Override
+    public Response<List<CollectionDtoResponse>> saveDocuments(List<CollectionDtoRequest> collectionDtoRequests) {
+        List<CollectionDtoResponse> collectionDtoResponses = new ArrayList<>();
+        for (CollectionDtoRequest request: collectionDtoRequests) {
+            Optional<Collection> collection = this.collectionRepository.findById(request.getId());
+            if(collection.isEmpty()){
+                throw new BusinessRuleException("collection.request.not.found");
+            }
+            collectionDtoResponses.add(createCollection(request).getData());
+        }
+        return new ResponseHandler<>(200,"Documentos guardados con éxito", "",collectionDtoResponses).getResponse();
+    }
+
 
     private boolean collectionExist(final Integer id){
         return !this.collectionRepository.existsById(id);
     }
+
 
 
 }

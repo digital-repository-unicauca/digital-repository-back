@@ -1,6 +1,7 @@
 package co.unicauca.digital.repository.back.domain.collection.model;
 
 import co.unicauca.digital.repository.back.domain.contract.model.Contract;
+import co.unicauca.digital.repository.back.domain.contractualDocument.model.ContractualDocument;
 import co.unicauca.digital.repository.back.domain.document.model.Document;
 import lombok.*;
 
@@ -37,16 +38,11 @@ public class Collection {
     @JoinColumn(name="contractId")
     private Contract contract;
 
-
     @OneToMany(mappedBy = "collection", cascade = CascadeType.ALL)
     private List<Document> documents;
 
-
-
-//    @ManyToOne(mappedBy = "collections",cascade = CascadeType.ALL)
-//    private ContractualDocument contractualDocument;
-//
-//    @ManyToOne(mappedBy = "collections",cascade = CascadeType.ALL)
-//    private Contract contract;
+    @ManyToOne
+    @JoinColumn(name = "ContractualDocumentId")
+    private ContractualDocument contractualDocument;
 
 }

@@ -7,12 +7,15 @@ import co.unicauca.digital.repository.back.domain.document.dto.response.Document
 import co.unicauca.digital.repository.back.domain.document.mapper.IDocumentMapper;
 import co.unicauca.digital.repository.back.domain.document.model.Document;
 import org.mapstruct.*;
+import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring", uses = IDocumentMapper.class )
 public interface ICollectionMapper {
+
+    ICollectionMapper INSTANCE = Mappers.getMapper(ICollectionMapper.class);
     @Mappings({
             @Mapping(source = "contract.id", target = "contractId"),
             @Mapping(target = "documents", qualifiedByName = "MapDocuments")
