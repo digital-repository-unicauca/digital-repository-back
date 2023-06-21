@@ -65,7 +65,4 @@ public class ContractualDocument {
     @JoinColumn(name = "modalityContractType")
     private ModalityContractType modalityContractType;
 
-    @OneToMany(mappedBy = "contractualDocument", cascade = CascadeType.ALL)
-    private List<Document> documents;
-
 }

@@ -1,9 +1,6 @@
 package co.unicauca.digital.repository.back.domain.document.model;
 import co.unicauca.digital.repository.back.domain.collection.model.Collection;
-import co.unicauca.digital.repository.back.domain.contractualDocument.model.ContractualDocument;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
@@ -66,11 +63,6 @@ public class Document {
     @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "collectionId")
     private Collection collection;
-
-    @ManyToOne()
-    @JsonIdentityReference(alwaysAsId = true)
-    @JoinColumn(name = "contractualDocumentId")
-    private ContractualDocument contractualDocument;
 
 
 }

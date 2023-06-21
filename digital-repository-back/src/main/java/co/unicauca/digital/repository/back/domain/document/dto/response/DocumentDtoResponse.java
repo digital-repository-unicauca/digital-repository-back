@@ -24,5 +24,4 @@ public class DocumentDtoResponse {
     private String updateUser;
     private LocalDateTime updateTime;
     private Integer collectionId;
-    private Integer contractualDocumentId;
 }

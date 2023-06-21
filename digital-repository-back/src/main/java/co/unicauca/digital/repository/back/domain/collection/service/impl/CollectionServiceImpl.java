@@ -15,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -27,6 +28,14 @@ public class CollectionServiceImpl implements ICollectionService {
     public CollectionServiceImpl(ICollectionRepository collectionRepository, ICollectionMapper collectionMapper) {
         this.collectionRepository = collectionRepository;
         this.collectionMapper = collectionMapper;
+    }
+
+    public Response<List<CollectionDtoResponse>> saveCollections(List<CollectionDtoRequest> collections ){
+        List<CollectionDtoResponse> collectionResponse =  new ArrayList<>();
+        for(CollectionDtoRequest request : collections){
+
+        }
+        return null;
     }
 
     @Override
