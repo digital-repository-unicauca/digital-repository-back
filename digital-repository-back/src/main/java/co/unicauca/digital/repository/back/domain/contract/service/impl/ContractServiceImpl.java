@@ -120,7 +120,7 @@ public class ContractServiceImpl implements IContractService {
         Contract contractSaved = this.contractRepository.save(contractModel);
         ContractDtoCreateResponse contractDtoCreateResponse = contractMapper.toDtoCreate(contractSaved);
 
-        return new ResponseHandler<>(200, "Contratista creado exitosamente", "Contratista creado exitosamente", contractDtoCreateResponse).getResponse();
+        return new ResponseHandler<>(200, "Contrato creado exitosamente", "Contrato creado exitosamente", contractDtoCreateResponse).getResponse();
     }
 
     /**
@@ -135,11 +135,13 @@ public class ContractServiceImpl implements IContractService {
         Contract updateContract = Contract.builder()
                 .id(contract.get().getId())
                 .reference(contractDtoUpdateRequest.getReference())
-                .signingDate(contractDtoUpdateRequest.getInitialDate())
+                //.signingDate(contractDtoUpdateRequest.getInitialDate())
                 .initialDate(contractDtoUpdateRequest.getInitialDate())
                 .finalDate(contractDtoUpdateRequest.getFinalDate())
                 .status(contractDtoUpdateRequest.getStatus())
                 .subject(contractDtoUpdateRequest.getSubject())
+                .vendor(contract.get().getVendor())
+                .modalityContractType(contract.get().getModalityContractType())
                 .createUser(contract.get().getCreateUser())
                 .createTime(contract.get().getCreateTime())
                 .updateTime(LocalDateTime.now())
@@ -149,7 +151,7 @@ public class ContractServiceImpl implements IContractService {
         Contract contractSaved = this.contractRepository.save(updateContract);
         ContractDtoCreateResponse contractDtoCreateResponse = contractMapper.toDtoCreate(contractSaved);
 
-        return new ResponseHandler<>(200, "Contratista actualizado exitosamente", "Contratista actualizado exitosamente", contractDtoCreateResponse).getResponse();
+        return new ResponseHandler<>(200, "Contrato actualizado exitosamente", "Contrato actualizado exitosamente", contractDtoCreateResponse).getResponse();
     }
 
     /**
@@ -162,7 +164,7 @@ public class ContractServiceImpl implements IContractService {
         if (contract.isEmpty()) throw new BusinessRuleException("contract.request.not.found");
         contractRepository.deleteById(id);
 
-        return new ResponseHandler<>(200, "Contratista eliminado exitosamente", "Contratista eliminado exitosamente", !contractRepository.existsById(id)).getResponse();
+        return new ResponseHandler<>(200, "Contrato eliminado exitosamente", "Contrato eliminado exitosamente", !contractRepository.existsById(id)).getResponse();
     }
 
     /**

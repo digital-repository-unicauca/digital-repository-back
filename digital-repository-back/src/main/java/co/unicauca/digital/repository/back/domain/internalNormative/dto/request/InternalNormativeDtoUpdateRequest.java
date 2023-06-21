@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.time.LocalDateTime;
 
 /**
@@ -14,7 +15,7 @@ public class InternalNormativeDtoUpdateRequest {
 
     /** InternalNormative id */
     @NotNull(message = "{InternalNormative.ID.field.not.null}")
-    @NotEmpty(message = "{InternalNormative.ID.field.not.empty}")
+    @Positive(message = "{InternalNormative.ID.field.positive}")
     private Integer id;
 
     /** InternalNormative name */
@@ -24,12 +25,9 @@ public class InternalNormativeDtoUpdateRequest {
 
     /** InternalNormative isInForce */
     @NotNull(message = "{InternalNormative.isInForce.field.not.null}")
-    @NotEmpty(message = "{InternalNormative.isInForce.field.not.empty}")
     private Boolean isInForce;
 
     /** InternalNormative initialTime */
-    @NotNull(message = "{InternalNormative.initialTime.field.not.null}")
-    @NotEmpty(message = "{InternalNormative.initialTime.field.not.empty}")
     private LocalDateTime initialTime;
 
     /** InternalNormative finalTime */

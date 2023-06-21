@@ -17,7 +17,7 @@ public class ContractDtoCreateRequest {
     @NotEmpty(message = "{contract.reference.field.not.empty}")
     private String reference;
 
-    /** Contract date of signature  */
+    //** Contract date of signature  */
     //private LocalDateTime signingDate;
 
     /** Contract initial date */
@@ -36,17 +36,17 @@ public class ContractDtoCreateRequest {
     private String subject;
 
     /** Contract Vendor */
-    @NotNull(message = "{contractualDocumentTypeRequest.vendor.field.null}")
-    @Min(value = 1, message = "{contractualDocumentTypeRequest.vendor.field.error}")
+    @NotNull(message = "{contract.vendor.field.null}")
+    @Min(value = 1, message = "{contract.vendor.field.error}")
     private int vendor;
 
-    /** Contract Modality Id*/
-    @NotNull(message = "{modalityContractType.field.null}")
-    @Min(value = 1, message = "{modalityContractType.field.null}")
+    /** Contract ModalityId*/
+    @NotNull(message = "{contract.modalityId.field.null}")
+    @Min(value = 1, message = "{contract.modalityId.field.positive}")
     private int modalityId;
 
-    /** Contract contractType Id*/
-    @NotNull(message = "{modalityContractType.field.null}")
-    @Min(value = 1, message = "{modalityContractType.field.null}")
+    /** Contract contractTypeId*/
+    @NotNull(message = "{contract.contractTypeId.field.null}")
+    @Min(value = 1, message = "{contract.contractTypeId.field.positive}")
     private int contractTypeId;
 }
