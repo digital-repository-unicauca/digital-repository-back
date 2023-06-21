@@ -19,12 +19,9 @@ public class InternalNormativeDtoCreateRequest {
 
     /** InternalNormative isInForce */
     @NotNull(message = "{InternalNormative.isInForce.field.not.null}")
-    @NotEmpty(message = "{InternalNormative.isInForce.field.not.empty}")
     private Boolean isInForce;
 
     /** InternalNormative initialTime */
-    @NotNull(message = "{InternalNormative.initialTime.field.not.null}")
-    @NotEmpty(message = "{InternalNormative.initialTime.field.not.empty}")
     private LocalDateTime initialTime;
 
     /** InternalNormative finalTime */
