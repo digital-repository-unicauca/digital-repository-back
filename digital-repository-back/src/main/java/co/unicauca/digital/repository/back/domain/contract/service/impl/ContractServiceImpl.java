@@ -107,7 +107,7 @@ public class ContractServiceImpl implements IContractService {
         contractModel.setSigningDate(contractModel.getInitialDate());
 
         // Set Vendor
-        Optional<Vendor> vendor = vendorRepository.findById(contractDtoCreateRequest.getVendor());
+        Optional<Vendor> vendor = vendorRepository.findByIdentification(contractDtoCreateRequest.getVendor());
         if (vendor.isEmpty()) throw new BusinessRuleException("contract.vendor.association.error");
         contractModel.setVendor(vendor.get());
 
@@ -135,7 +135,7 @@ public class ContractServiceImpl implements IContractService {
         Contract updateContract = Contract.builder()
                 .id(contract.get().getId())
                 .reference(contractDtoUpdateRequest.getReference())
-                //.signingDate(contractDtoUpdateRequest.getInitialDate())
+                .signingDate(contract.get().getSigningDate())
                 .initialDate(contractDtoUpdateRequest.getInitialDate())
                 .finalDate(contractDtoUpdateRequest.getFinalDate())
                 .status(contractDtoUpdateRequest.getStatus())
