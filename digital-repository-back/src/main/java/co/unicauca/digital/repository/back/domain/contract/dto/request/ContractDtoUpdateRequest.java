@@ -26,7 +26,7 @@ public class ContractDtoUpdateRequest {
     @NotEmpty(message = "{contract.reference.field.not.empty}")
     private String reference;
 
-    /** Contract date of signature  */
+    //** Contract date of signature  */
     //private LocalDateTime signingDate;
 
     /** Contract initial date */
@@ -43,5 +43,9 @@ public class ContractDtoUpdateRequest {
     @NotNull(message = "{contract.subject.field.not.null}")
     @NotEmpty(message = "{contract.subject.field.not.empty}")
     private String subject;
+
+    /** Contract Vendor */
+    @NotNull(message = "{contract.vendor.field.null}")
+    private String vendor;
 
 }

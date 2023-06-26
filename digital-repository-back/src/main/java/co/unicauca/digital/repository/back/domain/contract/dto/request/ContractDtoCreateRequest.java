@@ -37,8 +37,7 @@ public class ContractDtoCreateRequest {
 
     /** Contract Vendor */
     @NotNull(message = "{contract.vendor.field.null}")
-    @Min(value = 1, message = "{contract.vendor.field.error}")
-    private int vendor;
+    private String vendor;
 
     /** Contract ModalityId*/
     @NotNull(message = "{contract.modalityId.field.null}")
