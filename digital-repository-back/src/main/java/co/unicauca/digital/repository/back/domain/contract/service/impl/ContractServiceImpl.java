@@ -132,6 +132,9 @@ public class ContractServiceImpl implements IContractService {
 
         if (contract.isEmpty()) throw new BusinessRuleException("contract.request.not.found");
 
+        //Update DNI vendor
+        contract.get().getVendor().setIdentification(contractDtoUpdateRequest.getVendor());
+
         Contract updateContract = Contract.builder()
                 .id(contract.get().getId())
                 .reference(contractDtoUpdateRequest.getReference())

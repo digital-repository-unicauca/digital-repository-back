@@ -44,4 +44,8 @@ public class ContractDtoUpdateRequest {
     @NotEmpty(message = "{contract.subject.field.not.empty}")
     private String subject;
 
+    /** Contract Vendor */
+    @NotNull(message = "{contract.vendor.field.null}")
+    private String vendor;
+
 }
