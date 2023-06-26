@@ -1,11 +1,14 @@
 package co.unicauca.digital.repository.back.domain.contract.service;
 
+import co.unicauca.digital.repository.back.domain.collection.model.Collection;
 import co.unicauca.digital.repository.back.domain.contract.dto.request.ContractDtoCreateRequest;
 import co.unicauca.digital.repository.back.domain.contract.dto.request.ContractDtoUpdateRequest;
 import co.unicauca.digital.repository.back.domain.contract.dto.response.ContractDtoCreateResponse;
 import co.unicauca.digital.repository.back.domain.contract.dto.response.ContractDtoFindResponse;
 import co.unicauca.digital.repository.back.global.response.PageableResponse;
 import co.unicauca.digital.repository.back.global.response.Response;
+
+import java.util.List;
 
 /**
  * Interface that allows defining the business operations to be carried out on the Contract entity.
@@ -52,4 +55,5 @@ public interface IContractService {
      * @return {@link Response} Response object for the service, which contains information about the outcome of the transaction.
      */
     Response<Boolean> deleteContract(final int id);
+
 }

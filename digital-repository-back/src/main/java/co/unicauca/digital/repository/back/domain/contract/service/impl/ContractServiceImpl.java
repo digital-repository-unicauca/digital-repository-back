@@ -1,5 +1,6 @@
 package co.unicauca.digital.repository.back.domain.contract.service.impl;
 
+import co.unicauca.digital.repository.back.domain.collection.service.ICollectionService;
 import co.unicauca.digital.repository.back.domain.contract.dto.request.ContractDtoCreateRequest;
 import co.unicauca.digital.repository.back.domain.contract.dto.request.ContractDtoUpdateRequest;
 import co.unicauca.digital.repository.back.domain.contract.dto.response.ContractDtoCreateResponse;
@@ -43,14 +44,18 @@ public class ContractServiceImpl implements IContractService {
     /** Mapping object for mapping the products */
     private final IContractMapper contractMapper;
 
+    private final ICollectionService collectionService;
+
     /**
      * constructor method
      */
-    public ContractServiceImpl(IContractRepository contractRepository, IVendorRepository vendorRepository, IModalityContractTypeRepository modalityContractTypeRepository, IContractMapper contractMapper) {
+    public ContractServiceImpl(IContractRepository contractRepository, IVendorRepository vendorRepository, IModalityContractTypeRepository modalityContractTypeRepository, IContractMapper contractMapper,
+                               ICollectionService collectionService) {
         this.contractRepository = contractRepository;
         this.vendorRepository = vendorRepository;
         this.modalityContractTypeRepository = modalityContractTypeRepository;
         this.contractMapper = contractMapper;
+        this.collectionService = collectionService;
     }
 
     /**
@@ -118,6 +123,10 @@ public class ContractServiceImpl implements IContractService {
 
         // TODO Set create user
         Contract contractSaved = this.contractRepository.save(contractModel);
+
+        //create collectinos's contract
+        this.collectionService.createCollections(contractSaved);
+
         ContractDtoCreateResponse contractDtoCreateResponse = contractMapper.toDtoCreate(contractSaved);
 
         return new ResponseHandler<>(200, "Contrato creado exitosamente", "Contrato creado exitosamente", contractDtoCreateResponse).getResponse();

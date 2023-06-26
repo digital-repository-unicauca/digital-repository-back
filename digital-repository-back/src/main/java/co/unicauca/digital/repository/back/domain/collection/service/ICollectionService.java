@@ -2,8 +2,12 @@ package co.unicauca.digital.repository.back.domain.collection.service;
 
 import co.unicauca.digital.repository.back.domain.collection.dto.request.CollectionDtoRequest;
 import co.unicauca.digital.repository.back.domain.collection.dto.response.CollectionDtoResponse;
+import co.unicauca.digital.repository.back.domain.contract.model.Contract;
+import co.unicauca.digital.repository.back.domain.contractualDocument.model.ContractualDocument;
 import co.unicauca.digital.repository.back.global.response.PageableResponse;
 import co.unicauca.digital.repository.back.global.response.Response;
+
+import java.util.List;
 
 /**
  * Interface that allows defining the business operations to be carried out on the Collection entity.
@@ -49,5 +53,20 @@ public interface ICollectionService {
      * @return Response object for the service, indicating whether the deletion was successful.
      */
     Response<Boolean> delete(Integer id);
+
+    /**
+     *
+     * @param contract
+     * @return
+     */
+    Boolean createCollections(Contract contract);
+
+    /**
+     *
+     * @param collectionDtoRequests
+     * @return
+     */
+    Response<List<CollectionDtoResponse>> saveDocuments(List<CollectionDtoRequest> collectionDtoRequests);
+
 
 }
