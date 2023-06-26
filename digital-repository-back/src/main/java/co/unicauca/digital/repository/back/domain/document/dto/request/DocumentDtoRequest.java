@@ -38,7 +38,4 @@ public class DocumentDtoRequest {
 
     @NotNull(message = "{reference.field.not.null}")
     private Integer collectionId;
-
-    @NotNull(message = "{reference.field.not.null}")
-    private Integer contractualDocumentId;
 }

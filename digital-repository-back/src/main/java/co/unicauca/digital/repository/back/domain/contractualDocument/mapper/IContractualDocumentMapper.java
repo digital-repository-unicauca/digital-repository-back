@@ -43,7 +43,7 @@ public interface IContractualDocumentMapper {
             @Mapping(target = "ordering", source = "ordering"),
             @Mapping(target = "createTime", source = "createTime"),
             @Mapping(target = "createUser", source = "createUser"),
-            @Mapping(target = "contractualDocumentType", source = "contractualDocumentType.id"),
+            @Mapping(target = "contractualDocumentType", source = "contractualDocumentType"),
             @Mapping(target = "modalityContractType", source = "modalityContractType.id")
     })
     ContractualDocumentDtoFindResponse toDtoFind(final ContractualDocument contractualDocument);

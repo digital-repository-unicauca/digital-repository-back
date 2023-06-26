@@ -1,5 +1,6 @@
 package co.unicauca.digital.repository.back.domain.contractualDocument.dto.response;
 
+import co.unicauca.digital.repository.back.domain.contractualDocumentType.dto.response.ContractualDocumentTypeDtoFindResponse;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -34,7 +35,7 @@ public class ContractualDocumentDtoFindResponse {
     private String createUser;
 
     /** ContractualDocumentType ContractualDocumentType */
-    private Integer contractualDocumentType;
+    private ContractualDocumentTypeDtoFindResponse contractualDocumentType;
 
     /** ContractualDocument ModalityContractType */
     private Integer modalityContractType;
