@@ -26,7 +26,7 @@ public class ContractDtoUpdateRequest {
     @NotEmpty(message = "{contract.reference.field.not.empty}")
     private String reference;
 
-    /** Contract date of signature  */
+    //** Contract date of signature  */
     //private LocalDateTime signingDate;
 
     /** Contract initial date */
