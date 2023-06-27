@@ -20,5 +20,6 @@ public class CollectionDtoResponse {
     private LocalDateTime updateTime;
     private List<DocumentDtoResponse> documents;
     private Integer contractId;
+    private Integer contractualDocumentId;
 
 }
