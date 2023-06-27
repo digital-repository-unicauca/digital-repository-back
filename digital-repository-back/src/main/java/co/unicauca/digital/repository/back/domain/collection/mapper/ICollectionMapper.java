@@ -18,7 +18,8 @@ public interface ICollectionMapper {
     ICollectionMapper INSTANCE = Mappers.getMapper(ICollectionMapper.class);
     @Mappings({
             @Mapping(source = "contract.id", target = "contractId"),
-            @Mapping(target = "documents", qualifiedByName = "MapDocuments")
+            @Mapping(target = "documents", qualifiedByName = "MapDocuments"),
+            @Mapping(source = "contractualDocument.id", target = "contractualDocumentId")
     })
     CollectionDtoResponse toDto(Collection collection);
 
