@@ -68,5 +68,7 @@ public interface ICollectionService {
      */
     Response<List<CollectionDtoResponse>> saveDocuments(List<CollectionDtoRequest> collectionDtoRequests);
 
+    Response<CollectionDtoResponse> getCollectionIdByContractualdocumentAndContract(Integer contractualDocumentId, Integer contractId);
+
 
 }

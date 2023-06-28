@@ -54,4 +54,10 @@ public class CollectionController {
     public ResponseEntity<Response<Boolean>> delete(@PathVariable int id){
         return new ResponseEntity<>(this.collectionService.delete(id),HttpStatus.OK);
     }
+
+    @GetMapping("/{contractualDocumentId}/{contractId}")
+    public ResponseEntity<Response<CollectionDtoResponse>> getCollectionIdByContractualdocumentAndContract(@PathVariable("contractualDocumentId") int contractualDocumentId , @PathVariable("contractId") int contractId){
+        return new ResponseEntity<>(this.collectionService.getCollectionIdByContractualdocumentAndContract(contractualDocumentId,contractId),HttpStatus.OK);
+    }
+
 }
