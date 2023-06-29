@@ -40,7 +40,7 @@ public class DocumentServiceImpl implements IDocumentService {
     @Override
     @Transactional
     public Response<DocumentDtoResponse> createDocument(DocumentDtoRequest documentDtoRequest) {
-        Optional<Collection> collection = this.collectionRepository.findById(documentDtoRequest.getCollectionId());
+        Optional<Collection> collection = this.collectionRepository.findCollectionByContractIdAndContractualDocumentId(documentDtoRequest.getContractId(), documentDtoRequest.getContractualDocumentId());
         if(collection.isEmpty()){
             throw new BusinessRuleException("document.request.collectionId.not.found");
         }
@@ -56,13 +56,13 @@ public class DocumentServiceImpl implements IDocumentService {
     public Response<List<DocumentDtoResponse>> createDocuments(List<DocumentDtoRequest> documents) {
         List<DocumentDtoResponse> documentDtoResponses = new ArrayList<>();
         for (DocumentDtoRequest request : documents) {
-            Optional<Collection> collection = this.collectionRepository.findById(request.getCollectionId());
+            Optional<Collection> collection = this.collectionRepository.findCollectionByContractIdAndContractualDocumentId(request.getContractId(), request.getContractualDocumentId());
             if(collection.isEmpty()){
                 throw new BusinessRuleException("document.request.documents.collectionId.not.found");
             }
         }
         for (DocumentDtoRequest request : documents) {
-            Optional<Collection> collection = this.collectionRepository.findById(request.getCollectionId());
+            Optional<Collection> collection = this.collectionRepository.findCollectionByContractIdAndContractualDocumentId(request.getContractId(), request.getContractualDocumentId());
             if(collection.isEmpty()){
                 throw new BusinessRuleException("document.request.collectionId.not.found");
             }

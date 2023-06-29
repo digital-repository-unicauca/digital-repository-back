@@ -19,14 +19,12 @@ public interface IDocumentMapper {
 
     IDocumentMapper INSTANCE = Mappers.getMapper(IDocumentMapper.class);
     @Mappings({
-            @Mapping(source = "collection.id",target = "collectionId")
     })
     DocumentDtoResponse toDto(final Document document);
     List<DocumentDtoResponse> toDocumentList(List<Document> documentList);
 
     @InheritInverseConfiguration
     @Mappings({
-            @Mapping(source ="collectionId", target = "collection.id")
     })
     Document toEntity(final DocumentDtoRequest requestDto);
 
