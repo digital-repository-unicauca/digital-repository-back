@@ -35,7 +35,8 @@ public class DocumentDtoRequest {
     @NotNull(message = "{reference.field.not.null}")
     @NotEmpty(message = "{reference.field.not.empty}")
     private String createUser;
-
     @NotNull(message = "{reference.field.not.null}")
-    private Integer collectionId;
+    private Integer contractId;
+    @NotNull(message = "{reference.field.not.null}")
+    private Integer contractualDocumentId;
 }

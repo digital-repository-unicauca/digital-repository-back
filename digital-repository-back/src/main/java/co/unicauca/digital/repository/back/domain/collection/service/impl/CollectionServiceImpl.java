@@ -142,7 +142,7 @@ public class CollectionServiceImpl implements ICollectionService {
 
     @Override
     public Response<CollectionDtoResponse> getCollectionIdByContractualdocumentAndContract(Integer contractId,Integer contractualDocumentId) {
-        Collection collectionFound = collectionRepository.findcontractualDocumentAndContract(contractId,contractualDocumentId);
+        Collection collectionFound = collectionRepository.findContractualDocumentAndContract(contractId,contractualDocumentId);
         if(collectionFound == null){
             throw new BusinessRuleException("collection.request.not.found");
         }
