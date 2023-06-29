@@ -140,6 +140,17 @@ public class CollectionServiceImpl implements ICollectionService {
         return new ResponseHandler<>(200,"Documentos guardados con éxito", "",collectionDtoResponses).getResponse();
     }
 
+    @Override
+    public Response<CollectionDtoResponse> getCollectionIdByContractualdocumentAndContract(Integer contractId,Integer contractualDocumentId) {
+        Collection collectionFound = collectionRepository.findcontractualDocumentAndContract(contractId,contractualDocumentId);
+        if(collectionFound == null){
+            throw new BusinessRuleException("collection.request.not.found");
+        }
+
+        CollectionDtoResponse collectionDtoResponse = this.collectionMapper.toDto(collectionFound);
+        return new ResponseHandler<>(200,"Colección encontrada", "",collectionDtoResponse).getResponse();
+    }
+
 
     private boolean collectionExist(final Integer id){
         return !this.collectionRepository.existsById(id);
